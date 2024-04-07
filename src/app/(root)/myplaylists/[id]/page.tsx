@@ -12,7 +12,6 @@ export default async function page({ params }: any) {
                     <h1 className="overflow-hidden truncate text-lg font-bold dark:text-white sm:text-2xl md:text-3xl lg:text-4xl">
                         {playlist.name}
                     </h1>
-
                 </div>
                 <SongsTable playlist={playlist} />
             </div>

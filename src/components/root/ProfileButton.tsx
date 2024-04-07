@@ -52,7 +52,7 @@ export default function ProfileButton() {
                 <DropdownMenuContent className="mr-2">
                     <DropdownMenuItem
                         onClick={() => {
-                            Cookie.remove('token_exists');
+                            Cookie.remove('token_exists')
                             window.location.pathname = '/login'
                         }}
                     >

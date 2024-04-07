@@ -104,9 +104,7 @@ export default function Player() {
                         {currentSong.name || 'No Name'}
                     </span>
                     <span className="truncate text-xs text-black/80 dark:text-white/60">
-                        {Array.isArray(currentSong?.artists?.primary)
-                            ? currentSong?.artists?.all[0]?.name
-                            : 'unknown'}
+                        {Array.isArray(currentSong?.artists?.primary) ? currentSong?.artists?.all[0]?.name : 'unknown'}
                     </span>
                 </div>
             </div>

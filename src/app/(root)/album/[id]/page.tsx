@@ -22,7 +22,8 @@ export default async function page({ params }: any) {
                             {album?.name}
                         </h1>
                         <span className="overflow-hidden truncate text-xs text-black/80 dark:text-white/80 sm:mt-2 sm:text-sm">
-                            By {album?.artists.primary[0]?.name || album?.artists.all[0]?.name} | {album?.songCount || 0} songs
+                            By {album?.artists.primary[0]?.name || album?.artists.all[0]?.name} |{' '}
+                            {album?.songCount || 0} songs
                         </span>
                     </div>
                 </div>

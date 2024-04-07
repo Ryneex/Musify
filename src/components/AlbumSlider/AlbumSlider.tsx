@@ -28,7 +28,7 @@ export default function AlbumSlider({ albums = [], name }: Props) {
     return (
         <div className="mr-2 flex-shrink-0 overflow-hidden sm:mr-5">
             <div className="mb-2 flex items-center gap-1 sm:mb-4 sm:gap-3">
-                <h2 className="text-lg font-bold text-black/80 md:text-xl dark:text-white/85">{name}</h2>
+                <h2 className="text-lg font-bold text-black/80 dark:text-white/85 md:text-xl">{name}</h2>
                 <div
                     onClick={() => setExpanded(!expanded)}
                     className="mr-auto cursor-pointer select-none rounded-md p-1 text-xl text-black/60 hover:bg-black/10 dark:text-white/60"
@@ -36,7 +36,7 @@ export default function AlbumSlider({ albums = [], name }: Props) {
                     {expanded ? <RiExpandUpDownFill /> : <RiExpandLeftRightFill />}
                 </div>
                 {!expanded && (
-                    <div className="flex select-none gap-0 text-2xl text-black/60 sm:gap-2 dark:text-white/60">
+                    <div className="flex select-none gap-0 text-2xl text-black/60 dark:text-white/60 sm:gap-2">
                         <MdOutlineKeyboardArrowLeft className="cursor-pointer" onClick={() => emblaApi?.scrollPrev()} />
                         <MdOutlineKeyboardArrowRight
                             className="cursor-pointer"

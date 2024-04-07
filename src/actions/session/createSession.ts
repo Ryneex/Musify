@@ -1,4 +1,4 @@
-"use server"
+'use server'
 
 import dbconnect from '@/db/dbconnect'
 import { cookies } from 'next/headers'
@@ -14,10 +14,10 @@ export default async function createSession(user_id: string) {
         })
         cookies().set('auth_token', token, {
             secure: process.env.NODE_ENV === 'production',
-            httpOnly: true
+            httpOnly: true,
         })
         // It's used so that when user requests for logout, we can just remove this cookie, because  he can't login without it
-        cookies().set("token_exists", "true")
+        cookies().set('token_exists', 'true')
         return { success: 'Session created successfully' }
     } catch (err) {
         return { err: 'Something went wrong' }
