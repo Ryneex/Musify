@@ -44,9 +44,6 @@ function getHtml(code: number) {
     return `
 <div style="width: 100%; height: 100%; display: flex; align-items: center">
     <div style="max-width: 600px; margin: 0 auto; padding: 50px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
-        <div style="text-align: center; margin-bottom: 30px">
-            <h2 style="color: #007bff; margin: 0">Musify Email Verification Code</h2>
-        </div>
         <div style="padding: 20px; background-color: #f9f9f9; border-radius: 8px">
             <p style="font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px; color: #007bff">Your verification code is: <span style="color: #007bff">${code}</span></p>
             <p style="text-align: center; margin-bottom: 30px">Please use this code to verify your email address.</p>
