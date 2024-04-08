@@ -14,7 +14,7 @@ export default function Page() {
                     <h1 className="overflow-hidden truncate text-lg font-bold dark:text-white sm:text-2xl md:text-3xl lg:text-4xl">
                         Favourite Songs
                     </h1>
-                    {favourites?.length && <DownloadButton name="favourites" songs={favourites} />}
+                    {favourites?.length !== 0 && <DownloadButton name="favourites" songs={favourites || []} />}
                     <span className="overflow-hidden truncate text-xs text-black/80 dark:text-white/80 sm:mt-2 sm:text-sm">
                         By {user?.name} | {favourites?.length || 0} songs
                     </span>
