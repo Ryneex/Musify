@@ -21,6 +21,7 @@ import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { ResetIcon } from '@radix-ui/react-icons'
 import playlistStore from '@/store/playlist.store'
 import downloadSong from '@/helpers/downloadSong'
+import Link from 'next/link'
 
 function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
     const { currentSong, Playing } = useSnapshot(player)
@@ -76,6 +77,11 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                         <DropdownMenuShortcut>
                             <MdOutlineFileDownload className="text-lg" />
                         </DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="p-0">
+                        <Link className="h-full w-full px-2 py-1.5" href={`/album/${song.album.id}`}>
+                            Go to Album
+                        </Link>
                     </DropdownMenuItem>
                     {playlists && playlists?.length !== 0 && (
                         <DropdownMenuSub>
