@@ -2,6 +2,19 @@ import SongsTable from './SongsTable'
 import getPlaylistWithSong from '@/actions/user/playlist/getPlaylistWithSong'
 import { redirect } from 'next/navigation'
 import DownloadButton from '../../../../components/DownloadButton'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: any) {
+    const { playlist, err } = await getPlaylistWithSong(params.id)
+    if (err)
+        return {
+            title: 'Musify',
+        } as Metadata
+    else
+        return {
+            title: `Playlist - ${playlist?.name}`,
+        } as Metadata
+}
 
 export default async function page({ params }: any) {
     const { playlist, err } = await getPlaylistWithSong(params.id)

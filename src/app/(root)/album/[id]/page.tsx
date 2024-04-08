@@ -1,5 +1,20 @@
 import getAlbumsDetails from '@/actions/data/getAlbumDetails'
 import SongsTable from './SongsTable'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: any) {
+    const { err, album } = await getAlbumsDetails(params.id)
+    if (err)
+        return {
+            title: 'Musify',
+        } as Metadata
+    else
+        return {
+            title: `Album - ${album?.name}`,
+            description: album?.description,
+            authors: album?.artists.all,
+        } as Metadata
+}
 
 export default async function page({ params }: any) {
     const { err, album } = await getAlbumsDetails(params.id)

@@ -6,9 +6,10 @@ import { cookies } from 'next/headers'
 
 const inter = Inter({ subsets: ['latin'] })
 
+//prettier-ignore
 export const metadata: Metadata = {
-    title: 'Musify',
-    description: 'Free music streaming service',
+    title: 'Musify - Download songs for free',
+    description: 'Discover and organize your favorite tunes effortlessly with Musify. Download songs and playlists to enjoy your music anytime, anywhere, even offline.',
 }
 
 export default async function RootLayout({
