@@ -29,7 +29,7 @@ export default function SongContext({ children, song }: { children: ReactNode; s
             <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
             <ContextMenuContent className="dark:bg-zinc-900">
                 <ContextMenuItem className="p-0">
-                    <Link className="h-full w-full px-2 py-1.5" href={`http://localhost:3000/album/${song.album.id}`}>
+                    <Link className="h-full w-full px-2 py-1.5" href={`${process.env.HOST_URI}/${song.album.id}`}>
                         Go to Album
                     </Link>
                 </ContextMenuItem>
