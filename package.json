@@ -29,6 +29,7 @@
         "input-otp": "^1.2.4",
         "js-cookie": "^3.0.5",
         "jsonwebtoken": "^9.0.2",
+        "jszip": "^3.10.1",
         "ky": "^1.2.2",
         "luxon": "^3.4.4",
         "mongoose": "^8.2.3",
