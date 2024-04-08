@@ -4,7 +4,7 @@ import SongType from '@/types/song.types'
 import { memo, useMemo } from 'react'
 import { BiHeart } from 'react-icons/bi'
 import { FaHeart, FaRegCirclePlay } from 'react-icons/fa6'
-import { MdOutlinePauseCircle } from 'react-icons/md'
+import { MdOutlineFileDownload, MdOutlinePauseCircle } from 'react-icons/md'
 import { useSnapshot } from 'valtio'
 import {
     DropdownMenu,
@@ -20,6 +20,7 @@ import {
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { ResetIcon } from '@radix-ui/react-icons'
 import playlistStore from '@/store/playlist.store'
+import downloadSong from '@/helpers/downloadSong'
 
 function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
     const { currentSong, Playing } = useSnapshot(player)
@@ -65,12 +66,18 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                     </div>
                 </div>
             </div>
-            {playlists && playlists?.length !== 0 && (
-                <DropdownMenu>
-                    <DropdownMenuTrigger className="absolute bottom-3 right-2 text-black/60 dark:text-white">
-                        <PiDotsThreeOutlineVerticalFill />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:bg-zinc-900">
+            <DropdownMenu>
+                <DropdownMenuTrigger className="absolute bottom-3 right-2 text-black/60 dark:text-white">
+                    <PiDotsThreeOutlineVerticalFill />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="dark:bg-zinc-900">
+                    <DropdownMenuItem onClick={() => downloadSong({ name: song.name, song })}>
+                        Download
+                        <DropdownMenuShortcut>
+                            <MdOutlineFileDownload className="text-lg" />
+                        </DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    {playlists && playlists?.length !== 0 && (
                         <DropdownMenuSub>
                             <DropdownMenuSubTrigger>
                                 <span className="pr-5">Add to Playlist</span>
@@ -88,16 +95,16 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                                 ))}
                             </DropdownMenuSubContent>
                         </DropdownMenuSub>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            Cancel
-                            <DropdownMenuShortcut>
-                                <ResetIcon />
-                            </DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )}
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                        Cancel
+                        <DropdownMenuShortcut>
+                            <ResetIcon />
+                        </DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
             <span className="truncate px-1 pt-1 text-sm text-black/90 dark:text-white/90 sm:pt-3">{song.name}</span>
             <span className="truncate pl-1 text-xs text-black/70 dark:text-white/70">
                 By {song.artists.primary[0]?.name || song.artists.all[0]?.name}

@@ -11,12 +11,14 @@ import {
     ContextMenuSubTrigger,
     ContextMenuTrigger,
 } from '@/components/shadcn/ui/context-menu'
+import downloadSong from '@/helpers/downloadSong'
 import playlistStore from '@/store/playlist.store'
 import userStore from '@/store/user.store'
 import Song from '@/types/song.types'
 import { ResetIcon } from '@radix-ui/react-icons'
 import { ReactNode } from 'react'
 import { BiHeart } from 'react-icons/bi'
+import { MdOutlineFileDownload } from 'react-icons/md'
 import { useSnapshot } from 'valtio'
 
 export default function SongContext({ children, song }: { children: ReactNode; song: Song }) {
@@ -53,6 +55,12 @@ export default function SongContext({ children, song }: { children: ReactNode; s
                         </ContextMenuSubContent>
                     </ContextMenuSub>
                 )}
+                <ContextMenuItem onClick={() => downloadSong({ name: song.name, song })}>
+                    Download
+                    <ContextMenuShortcut>
+                        <MdOutlineFileDownload className="text-lg" />
+                    </ContextMenuShortcut>
+                </ContextMenuItem>
                 <ContextMenuSeparator />
                 <ContextMenuItem>
                     Cancel

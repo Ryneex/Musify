@@ -28,4 +28,4 @@ export default function SongsTable({ songs = [] }: Props) {
             </div>
         </div>
     )
-}
+}  

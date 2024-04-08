@@ -8,12 +8,14 @@ import {
     ContextMenuShortcut,
     ContextMenuTrigger,
 } from '@/components/shadcn/ui/context-menu'
+import downloadSong from '@/helpers/downloadSong'
 import playlistStore from '@/store/playlist.store'
 import Song from '@/types/song.types'
 import { ResetIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { LuTrash } from 'react-icons/lu'
+import { MdOutlineFileDownload } from 'react-icons/md'
 
 export default function SongContext({
     children,
@@ -34,6 +36,12 @@ export default function SongContext({
                     <Link className="h-full w-full px-2 py-1.5" href={`http://localhost:3000/album/${song.album.id}`}>
                         Go to Album
                     </Link>
+                </ContextMenuItem>
+                <ContextMenuItem onClick={() => downloadSong({ name: song.name, song })}>
+                    Download
+                    <ContextMenuShortcut>
+                        <MdOutlineFileDownload className="text-lg" />
+                    </ContextMenuShortcut>
                 </ContextMenuItem>
                 <ContextMenuSeparator />
                 <ContextMenuItem
