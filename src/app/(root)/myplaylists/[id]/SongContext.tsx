@@ -33,7 +33,7 @@ export default function SongContext({
             <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
             <ContextMenuContent>
                 <ContextMenuItem className="p-0">
-                    <Link className="h-full w-full px-2 py-1.5" href={`${process.env.HOST_URI}/${song.album.id}`}>
+                    <Link className="h-full w-full px-2 py-1.5" href={`/album/${song.album.id}`}>
                         Go to Album
                     </Link>
                 </ContextMenuItem>
