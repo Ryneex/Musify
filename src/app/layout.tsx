@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import TopProgressbar from '@/components/TopProgressbar'
 import { cookies } from 'next/headers'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
         <html lang="en" className={theme?.value || 'light'}>
             <body className={inter.className}>
                 <TopProgressbar />
+                <SpeedInsights />
                 {children}
             </body>
         </html>
