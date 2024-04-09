@@ -15,6 +15,7 @@ export default async function getSongsById(ids: string[] | [] = []) {
                 },
             })
             .json()
+        if (data.status == 'failure') return { err: 'Song not found' }
         return { songs: data.songs.map((e: any) => formatSong(e)) }
     } catch (err) {
         return { err: 'Something went wrong' }
