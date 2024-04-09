@@ -19,6 +19,11 @@ export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
         align: 'start',
         slidesToScroll: 2,
     })
+
+    useEffect(() => {
+        if (lockExpanded) emblaApi?.destroy()
+    }, [lockExpanded, emblaApi])
+
     // embla carousel gets glitched when we messup with flex-wrap, so we have to reinit it everytime
     useEffect(() => {
         emblaApi?.reInit()
