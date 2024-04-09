@@ -2,7 +2,7 @@ import Song from '@/types/song.types'
 import { proxy } from 'valtio'
 import { devtools } from 'valtio/utils'
 
-const player = proxy({
+const playerStore = proxy({
     currentSong: {} as Song,
     SongList: [] as Song[],
     Playing: false,
@@ -11,11 +11,11 @@ const player = proxy({
     shuffle: false,
 
     changeCurrentSong(song: Song) {
-        if (this.currentSong.id !== song.id) player.currentSong = song
+        if (this.currentSong.id !== song.id) this.currentSong = song
     },
 
     togglePlay() {
-        player.Playing = !player.Playing
+        this.Playing = !this.Playing
     },
 
     toggleVolume() {
@@ -71,5 +71,5 @@ const player = proxy({
         }
     },
 })
-devtools(player, { name: 'player', enabled: true })
-export default player
+devtools(playerStore, { name: 'playerStore', enabled: true })
+export default playerStore

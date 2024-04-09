@@ -7,7 +7,7 @@ import { MdSkipNext, MdSkipPrevious, MdVolumeOff, MdVolumeUp } from 'react-icons
 import { IoIosPause } from 'react-icons/io'
 import { Duration } from 'luxon'
 import { useSnapshot } from 'valtio'
-import player from '@/store/player.store'
+import playerStore from '@/store/player.store'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/shadcn/ui/tooltip'
 
 export default function Player() {
@@ -16,7 +16,7 @@ export default function Player() {
     const [sliderValue, setSliderValue] = useState(0)
     const [isPointerDown, setIsPointerDown] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
-    const { currentSong, Playing, volume, shuffle } = useSnapshot(player)
+    const { currentSong, Playing, volume, shuffle } = useSnapshot(playerStore)
 
     // Formats song Duration
     const duration = useMemo(() => {
@@ -41,7 +41,7 @@ export default function Player() {
         if (!currentSong.downloadUrl) return
         setSliderValue(0)
         setCurrentTime(0)
-        player.Playing = true
+        playerStore.Playing = true
     }, [currentSong])
 
     // Syncs Slider position based on songs currentTime
@@ -66,7 +66,7 @@ export default function Player() {
     }, [volume, audio])
 
     useEffect(() => {
-        player.volume = Number(localStorage.getItem('volume') || 1)
+        playerStore.volume = Number(localStorage.getItem('volume') || 1)
     }, [])
 
     return (
@@ -81,8 +81,8 @@ export default function Player() {
                         : ''
                 }
                 onEnded={() => {
-                    player.addToPlayedSong(currentSong.id)
-                    player.songEnded()
+                    playerStore.addToPlayedSong(currentSong.id)
+                    playerStore.songEnded()
                 }}
                 onError={() => {
                     audio?.load()
@@ -114,18 +114,18 @@ export default function Player() {
                 <div className="flex justify-between">
                     {/* Playback controls */}
                     <div className="flex items-center gap-2 text-2xl text-black/90 dark:text-white/90 md:gap-3">
-                        <MdSkipPrevious onClick={() => player.playPrevSong()} className="cursor-pointer" />
+                        <MdSkipPrevious onClick={() => playerStore.playPrevSong()} className="cursor-pointer" />
                         <div
                             className="flex aspect-square w-6 cursor-pointer items-center justify-center  overflow-hidden rounded-full text-[20px]"
-                            onClick={() => currentSong.downloadUrl && player.togglePlay()}
+                            onClick={() => currentSong.downloadUrl && playerStore.togglePlay()}
                         >
                             {Playing ? <IoIosPause /> : <IoPlayOutline className="ml-1" />}
                         </div>
-                        <MdSkipNext onClick={() => player.playNextSong()} className="cursor-pointer" />
+                        <MdSkipNext onClick={() => playerStore.playNextSong()} className="cursor-pointer" />
                         <Tooltip delayDuration={100}>
                             <TooltipTrigger onClick={(e) => e.preventDefault()}>
                                 <IoShuffle
-                                    onClick={() => player.toggleShuffle()}
+                                    onClick={() => playerStore.toggleShuffle()}
                                     className={`cursor-pointer text-2xl ${shuffle && 'text-blue-600 dark:text-blue-400'}`}
                                 />
                             </TooltipTrigger>
@@ -136,14 +136,14 @@ export default function Player() {
                     </div>
                     {/* Volume control : hidden until 1024px */}
                     <div className="flex grow basis-1/6 items-center justify-end gap-2 text-black dark:text-white lg:hidden">
-                        <div className="cursor-pointer text-2xl" onClick={() => player.toggleVolume()}>
+                        <div className="cursor-pointer text-2xl" onClick={() => playerStore.toggleVolume()}>
                             {volume === 0 ? <MdVolumeOff /> : <MdVolumeUp />}
                         </div>
                         <Slider
                             className="w-20 sm:w-24"
                             onValueChange={([e]) => {
                                 localStorage.setItem('volume', String(e))
-                                player.volume = e
+                                playerStore.volume = e
                             }}
                             value={[volume]}
                             max={1}
@@ -168,14 +168,14 @@ export default function Player() {
             </div>
             {/* Volume control : visible until 1024px */}
             <div className="hidden basis-1/6 items-center justify-end gap-2 text-black dark:text-white lg:flex">
-                <div className="cursor-pointer text-2xl" onClick={() => player.toggleVolume()}>
+                <div className="cursor-pointer text-2xl" onClick={() => playerStore.toggleVolume()}>
                     {volume === 0 ? <MdVolumeOff /> : <MdVolumeUp />}
                 </div>
                 <Slider
                     className="w-24"
                     onValueChange={([e]) => {
                         localStorage.setItem('volume', String(e))
-                        player.volume = e
+                        playerStore.volume = e
                     }}
                     value={[volume]}
                     max={1}

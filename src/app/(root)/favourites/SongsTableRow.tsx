@@ -1,6 +1,6 @@
 'use client'
 
-import player from '@/store/player.store'
+import playerStore from '@/store/player.store'
 import Song from '@/types/song.types'
 import { Duration } from 'luxon'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ type Props = {
     songList: Song[]
 }
 export default function SongsTableRow({ song, i, songList = [] }: Props) {
-    const { currentSong, Playing } = useSnapshot(player)
+    const { currentSong, Playing } = useSnapshot(playerStore)
     const [isMouseOver, setIsMouseOver] = useState(false)
     const duration = useMemo(() => {
         const time = Duration.fromObject({ second: Number(song?.duration) || 0 }).toFormat('mm:ss')
@@ -30,8 +30,8 @@ export default function SongsTableRow({ song, i, songList = [] }: Props) {
                 onPointerLeave={() => setIsMouseOver(false)}
                 onClick={(e: any) => {
                     if (e.target.localName === 'a') return
-                    player.changeCurrentSong(song)
-                    player.SongList = songList
+                    playerStore.changeCurrentSong(song)
+                    playerStore.SongList = songList
                 }}
             >
                 <div className="flex w-9 shrink-0 items-center justify-center text-black/70 dark:text-white/60 sm:w-12">
@@ -39,7 +39,7 @@ export default function SongsTableRow({ song, i, songList = [] }: Props) {
                         <div
                             className={`flex cursor-pointer select-none items-center justify-center ${currentSong.id === song.id && '!text-blue-600 dark:!text-blue-400'}`}
                             onClick={() => {
-                                player.togglePlay()
+                                playerStore.togglePlay()
                             }}
                         >
                             {Playing && currentSong.id === song.id ? (
