@@ -1,4 +1,4 @@
-import player from '@/store/player.store'
+import playerStore from '@/store/player.store'
 import userStore from '@/store/user.store'
 import SongType from '@/types/song.types'
 import { memo, useMemo } from 'react'
@@ -24,7 +24,7 @@ import downloadSong from '@/helpers/downloadSong'
 import Link from 'next/link'
 
 function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
-    const { currentSong, Playing } = useSnapshot(player)
+    const { currentSong, Playing } = useSnapshot(playerStore)
     const { user } = useSnapshot(userStore)
     const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
     const { playlists } = useSnapshot(playlistStore)
@@ -45,9 +45,9 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                 >
                     <div
                         onClick={() => {
-                            player.changeCurrentSong(song)
-                            player.SongList = songs
-                            player.togglePlay()
+                            playerStore.changeCurrentSong(song)
+                            playerStore.SongList = songs
+                            playerStore.togglePlay()
                         }}
                         className="cursor-pointer text-3xl text-blue-400 transition duration-300 hover:scale-110 md:text-4xl"
                     >
@@ -67,6 +67,15 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                     </div>
                 </div>
             </div>
+            <Link
+                href={`song/${song.id}`}
+                className="truncate px-1 pt-1 text-sm text-black/90 dark:text-white/90 sm:pt-3"
+            >
+                {song.name}
+            </Link>
+            <span className="truncate pl-1 text-xs text-black/70 dark:text-white/70">
+                By {song.artists.primary[0]?.name || song.artists.all[0]?.name}
+            </span>
             <DropdownMenu>
                 <DropdownMenuTrigger className="absolute bottom-3 right-2 text-black/60 dark:text-white">
                     <PiDotsThreeOutlineVerticalFill />
@@ -77,6 +86,11 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                         <DropdownMenuShortcut>
                             <MdOutlineFileDownload className="text-lg" />
                         </DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="p-0">
+                        <Link className="h-full w-full px-2 py-1.5" href={`/song/${song.id}`}>
+                            View Details
+                        </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="p-0">
                         <Link className="h-full w-full px-2 py-1.5" href={`/album/${song.album.id}`}>
@@ -111,10 +125,6 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-            <span className="truncate px-1 pt-1 text-sm text-black/90 dark:text-white/90 sm:pt-3">{song.name}</span>
-            <span className="truncate pl-1 text-xs text-black/70 dark:text-white/70">
-                By {song.artists.primary[0]?.name || song.artists.all[0]?.name}
-            </span>
         </div>
     )
 }

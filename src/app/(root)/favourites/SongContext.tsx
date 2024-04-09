@@ -33,6 +33,11 @@ export default function SongContext({ children, song }: { children: ReactNode; s
                         Go to Album
                     </Link>
                 </ContextMenuItem>
+                <ContextMenuItem className="p-0">
+                    <Link className="h-full w-full px-2 py-1.5" href={`/song/${song.id}`}>
+                        View Details
+                    </Link>
+                </ContextMenuItem>
                 {playlists?.length !== 0 && (
                     <ContextMenuSub>
                         <ContextMenuSubTrigger>
