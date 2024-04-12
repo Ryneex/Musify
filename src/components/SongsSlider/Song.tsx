@@ -1,7 +1,7 @@
 import playerStore from '@/store/player.store'
 import userStore from '@/store/user.store'
 import SongType from '@/types/song.types'
-import { memo, useMemo } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 import { BiHeart } from 'react-icons/bi'
 import { FaHeart, FaRegCirclePlay } from 'react-icons/fa6'
 import { MdOutlineFileDownload, MdOutlinePauseCircle } from 'react-icons/md'
@@ -23,16 +23,22 @@ import playlistStore from '@/store/playlist.store'
 import downloadSong from '@/helpers/downloadSong'
 import Link from 'next/link'
 
-function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
+function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; expanded: boolean }) {
     const { currentSong, Playing } = useSnapshot(playerStore)
     const { user } = useSnapshot(userStore)
-    const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
     const { playlists } = useSnapshot(playlistStore)
+    const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
+    const [isMobile, setIsMobile] = useState(false)
+    // prettier-ignore
+
+    useEffect(() => {
+        setIsMobile(/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/.test(navigator.userAgent))
+    }, [])
 
     return (
         <div
             key={song.id}
-            className="group relative flex w-28 shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44"
+            className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}
         >
             <div className="relative w-full select-none overflow-hidden rounded-xl">
                 <img
@@ -53,18 +59,19 @@ function Song({ song, songs }: { song: SongType; songs: SongType[] }) {
                     >
                         {currentSong.id === song.id && Playing ? <MdOutlinePauseCircle /> : <FaRegCirclePlay />}
                     </div>
-                    <div
-                        className="absolute bottom-2 left-2 cursor-pointer text-lg sm:text-xl md:text-2xl"
-                        onClick={() => {
-                            if (isFavourite) {
-                                userStore.removeFavouriteSong(song.id)
-                            } else {
-                                userStore.addFavouriteSong(song)
-                            }
-                        }}
-                    >
-                        {isFavourite ? <FaHeart className="fill-pink-400" /> : <BiHeart className="fill-white" />}
-                    </div>
+                </div>
+                <div className="absolute bottom-0 left-0 size-10 rounded-full bg-black blur-xl"></div>
+                <div
+                    className={`absolute bottom-2 left-2 cursor-pointer text-lg ${isMobile ? 'opacity-100' : 'opacity-0'} transition duration-300 group-hover:opacity-100 sm:text-xl md:text-2xl`}
+                    onClick={() => {
+                        if (isFavourite) {
+                            userStore.removeFavouriteSong(song.id)
+                        } else {
+                            userStore.addFavouriteSong(song)
+                        }
+                    }}
+                >
+                    {isFavourite ? <FaHeart className="fill-pink-400" /> : <BiHeart className="fill-white" />}
                 </div>
             </div>
             <Link

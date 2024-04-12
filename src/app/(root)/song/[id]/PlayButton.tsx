@@ -1,12 +1,11 @@
 'use client'
 
-import { Button } from '@/components/button'
 import playerStore from '@/store/player.store'
 import userStore from '@/store/user.store'
 import Song from '@/types/song.types'
 import { useMemo } from 'react'
 import { BiHeart } from 'react-icons/bi'
-import { FaHeart } from 'react-icons/fa6'
+import { FaHeart, FaRegCirclePlay } from 'react-icons/fa6'
 import { useSnapshot } from 'valtio'
 import {
     DropdownMenu,
@@ -25,6 +24,7 @@ import Link from 'next/link'
 import playlistStore from '@/store/playlist.store'
 import downloadSong from '@/helpers/downloadSong'
 import { ResetIcon } from '@radix-ui/react-icons'
+import { LuPauseCircle } from 'react-icons/lu'
 
 export default function PlayButton({ song }: { song: Song }) {
     const { currentSong, Playing } = useSnapshot(playerStore)
@@ -33,18 +33,22 @@ export default function PlayButton({ song }: { song: Song }) {
     const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
     return (
         <div className="flex items-center gap-3">
-            <Button
+            <div
                 onClick={() => {
                     playerStore.changeCurrentSong(song)
                     playerStore.SongList = []
                     playerStore.togglePlay()
                 }}
-                className="cursor-pointer rounded-full px-7"
+                className="flex aspect-square w-8 cursor-pointer items-center justify-center overflow-hidden text-blue-400"
             >
-                {Playing && currentSong.id === song.id ? 'Pause' : 'Play'}
-            </Button>
+                {currentSong.id === song.id && Playing ? (
+                    <LuPauseCircle className="size-8" />
+                ) : (
+                    <FaRegCirclePlay className="size-[30px]" />
+                )}
+            </div>
             <div
-                className="cursor-pointer text-4xl"
+                className="cursor-pointer text-3xl text-pink-400"
                 onClick={() => {
                     if (isFavourite) {
                         userStore.removeFavouriteSong(song.id)
@@ -53,11 +57,17 @@ export default function PlayButton({ song }: { song: Song }) {
                     }
                 }}
             >
-                {isFavourite ? <FaHeart className="fill-pink-400" /> : <BiHeart className="fill-white" />}
+                {isFavourite ? (
+                    <FaHeart className="fill-red-400" />
+                ) : (
+                    <BiHeart className="fill-black/70 dark:fill-white" />
+                )}
             </div>
             <DropdownMenu>
-                <DropdownMenuTrigger className="text-black/60 text-xl dark:text-white">
-                    <PiDotsThreeOutlineVerticalFill />
+                <DropdownMenuTrigger asChild className="text-xl text-black/60 dark:text-white">
+                    <div className="cursor-pointer">
+                        <PiDotsThreeOutlineVerticalFill />
+                    </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="dark:bg-zinc-900">
                     <DropdownMenuItem onClick={() => downloadSong({ name: song.name, song })}>

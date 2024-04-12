@@ -46,9 +46,11 @@ export default function AlbumSlider({ albums = [], name }: Props) {
                 )}
             </div>
             <div className="overflow-hidden" ref={emblaRef}>
-                <div className={`mb-7 flex gap-2 sm:mb-10 sm:gap-3 md:gap-4 ${expanded && 'flex-wrap'}`}>
+                <div
+                    className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-4 overflow-auto xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 xl:!gap-7 2xl:grid-cols-7' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}
+                >
                     {albums.map((e) => (
-                        <Album key={e.id} album={e} />
+                        <Album expanded={expanded} key={e.id} album={e} />
                     ))}
                 </div>
             </div>

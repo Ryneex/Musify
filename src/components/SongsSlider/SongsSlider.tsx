@@ -14,7 +14,7 @@ type Props = {
 }
 
 export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(lockExpanded || false)
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: 'start',
         slidesToScroll: 2,
@@ -42,7 +42,7 @@ export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
                         {expanded ? <RiExpandUpDownFill /> : <RiExpandLeftRightFill />}
                     </div>
                 )}
-                {!(expanded || lockExpanded) && (
+                {!expanded && (
                     <div className="flex select-none gap-0 text-2xl text-black/60 dark:text-white/60 sm:gap-2">
                         <MdOutlineKeyboardArrowLeft className="cursor-pointer" onClick={() => emblaApi?.scrollPrev()} />
                         <MdOutlineKeyboardArrowRight
@@ -54,10 +54,10 @@ export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
             </div>
             <div className="overflow-hidden" ref={emblaRef}>
                 <div
-                    className={`mb-7 flex gap-2 sm:mb-10 sm:gap-3 md:gap-4 ${(expanded || lockExpanded) && 'flex-wrap'}`}
+                    className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-4 overflow-auto xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 xl:!gap-7 2xl:grid-cols-7' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}
                 >
                     {songs.map((e) => (
-                        <Song key={e.id} songs={songs} song={e} />
+                        <Song key={e.id} expanded={expanded} songs={songs} song={e} />
                     ))}
                 </div>
             </div>
