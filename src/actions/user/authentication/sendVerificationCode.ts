@@ -21,12 +21,12 @@ export default async function sendVerificationCode() {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'misajidcoc@gmail.com',
+                user: process.env.EMAIL,
                 pass: process.env.EMAIL_PASSWORD,
             },
         })
         await transporter.sendMail({
-            from: 'Musify <misajidcoc@gmail.com>',
+            from: `Musify <${process.env.EMAIL}>`,
             to: res.email,
             subject: 'Musify Verification Code',
             html: getHtml(code),
