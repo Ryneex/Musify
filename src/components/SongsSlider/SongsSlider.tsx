@@ -54,7 +54,7 @@ export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
             </div>
             <div className="overflow-hidden" ref={emblaRef}>
                 <div
-                    className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-4 overflow-auto xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 xl:!gap-7 2xl:grid-cols-7' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}
+                    className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-2 overflow-auto xs:grid-cols-3 sm:!gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}
                 >
                     {songs.map((e) => (
                         <Song key={e.id} expanded={expanded} songs={songs} song={e} />
