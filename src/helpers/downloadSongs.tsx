@@ -11,7 +11,7 @@ export default async function downloadSongs({ name, songs }: Prop) {
     const zip = new JSZip()
     const songFolder = zip.folder(name || 'songs')
     let counter = 0
-    const toastId = toast.success(`${counter} songs downloaded`, {
+    const toastId = toast.loading(`${0}/${songs.length}songs downloaded`, {
         position: 'top-center',
         cancel: {
             label: 'Hide',
