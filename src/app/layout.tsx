@@ -19,7 +19,7 @@ export default async function RootLayout({
 }>) {
     const theme = cookies().get('theme')
     return (
-        <html lang="en" className={theme?.value || 'light'}>
+        <html lang="en" className={theme?.value || 'dark'}>
             <body className={inter.className}>
                 <TopProgressbar />
                 {children}

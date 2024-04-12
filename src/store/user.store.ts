@@ -9,7 +9,6 @@ import AddFavourite from '@/actions/user/favourites/addFavourites'
 import callServerActionWithToast from '@/helpers/callServerActionWithToast'
 
 const userStore = proxy({
-    theme: null as unknown as 'light' | 'dark',
     user: { name: null as null | string, email: null as null | string, favourites: [] as string[] },
     favourites: null as null | Song[],
 
@@ -42,14 +41,12 @@ const userStore = proxy({
     },
 
     toggleTheme() {
-        if (Cookie.get('theme') === 'dark') {
-            this.theme = 'light'
-            Cookie.set('theme', 'light')
-            document.querySelector('html')!.className = this.theme
-        } else {
-            this.theme = 'dark'
+        if (Cookie.get('theme') === 'light') {
             Cookie.set('theme', 'dark')
-            document.querySelector('html')!.className = this.theme
+            document.querySelector('html')!.className = 'dark'
+        } else {
+            Cookie.set('theme', 'light')
+            document.querySelector('html')!.className = 'light'
         }
     },
 })
