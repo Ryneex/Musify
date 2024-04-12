@@ -7,7 +7,7 @@ function Album({ album, expanded }: { album: AlbumType; expanded: boolean }) {
     return (
         <div
             key={album.id}
-            className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}
+            className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}
             onClick={() => router.push(`/album/${album.id}`)}
         >
             <div className="relative w-full select-none overflow-hidden rounded-xl">
