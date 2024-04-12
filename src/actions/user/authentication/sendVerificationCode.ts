@@ -26,10 +26,9 @@ export default async function sendVerificationCode() {
             },
         })
         await transporter.sendMail({
-            from: 'misajidcoc@gmail.com',
+            from: 'Musify <misajidcoc@gmail.com>',
             to: res.email,
             subject: 'Musify Verification Code',
-
             html: getHtml(code),
         })
         const expiresAt = Date.now() + 1000 * 60 * 2
