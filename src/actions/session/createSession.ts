@@ -10,7 +10,7 @@ export default async function createSession(user_id: string) {
 
     try {
         const token = jwt.sign({ user_id }, process.env.JWT_SECRET as string, {
-            expiresIn: 60 * 60 * 24,
+            expiresIn: 60 * 60 * 24 * 30,
         })
         cookies().set('auth_token', token, {
             secure: process.env.NODE_ENV === 'production',
