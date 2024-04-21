@@ -17,7 +17,7 @@ export default async function Login(values: any) {
         if (!user) return { error: 'Incorrect email or password' }
         const doesPassMatch = await argon.verify(user.password, values.password)
         if (!doesPassMatch) return { error: 'Incorrect email or password' }
-        const res = await auth.createSession({ userId: user._id, expiresIn: 1000 * 3600 })
+        const res = await auth.createSession({ userId: user._id, expiresIn: 1000 * 60 * 60 * 24 * 30 })
         if (res.error) return { error: res.error }
         return { success: 'Successfully logged in' }
     } catch (error) {
