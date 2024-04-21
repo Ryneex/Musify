@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 export default async function createSession(user_id: string) {
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
 
     try {
         const token = jwt.sign({ user_id }, process.env.JWT_SECRET as string, {
@@ -19,7 +19,7 @@ export default async function createSession(user_id: string) {
         // It's used so that when user requests for logout, we can just remove this cookie, because  he can't login without it
         cookies().set('token_exists', 'true')
         return { success: 'Session created successfully' }
-    } catch (err) {
-        return { err: 'Something went wrong' }
+    } catch (error) {
+        return { error: 'Something went wrong' }
     }
 }

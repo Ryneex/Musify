@@ -4,10 +4,10 @@ import React from 'react'
 import PlayButton from './PlayButton'
 
 export default async function page({ params }: any) {
-    const { err, songs } = await getSongsById([params.id])
-    if (err)
+    const { error, songs } = await getSongsById([params.id])
+    if (error)
         return (
-            <div className="flex h-full w-full items-center justify-center text-black/70 dark:text-white/70">{err}</div>
+            <div className="flex h-full w-full items-center justify-center text-black/70 dark:text-white/70">{error}</div>
         )
 
     const song: Song = songs[0]

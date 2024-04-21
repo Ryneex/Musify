@@ -16,7 +16,7 @@ export default async function getAlbumsDetails(id: string) {
             })
             .json()
         return { album: formatAlbum(res) }
-    } catch (err) {
-        return { err: 'Something went wrong when fetching Album Queries' }
+    } catch (error) {
+        return { error: 'Something went wrong when fetching Album Queries' }
     }
 }

@@ -8,15 +8,15 @@ import { redirect } from 'next/navigation'
 
 export default async function getPlaylistWithSong(playlistId: string) {
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
     const res = await authenticateUser()
-    if (res.err) redirect('/login')
+    if (res.error) redirect('/login')
 
     try {
         const playlist = await Playlist.findOne({ _id: playlistId, owner_id: res.user_id })
         const songs = await getSongsById(playlist.songs)
-        return { playlist: { ...JSON.parse(JSON.stringify(playlist)), songs: songs.err ? [] : songs.songs } }
+        return { playlist: { ...JSON.parse(JSON.stringify(playlist)), songs: songs.error ? [] : songs.songs } }
     } catch (error) {
-        return { err: 'Something went wrong' }
+        return { error: 'Something went wrong' }
     }
 }

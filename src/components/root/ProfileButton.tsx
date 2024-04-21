@@ -37,7 +37,7 @@ export default function ProfileButton() {
         }
         setLoading(true)
         const res = await DeleteUser(password)
-        if (res?.err) setError(res.err)
+        if (res?.error) setError(res.error)
         setLoading(false)
     }
 

@@ -6,16 +6,16 @@ import authenticateUser from '@/actions/session/authenticateUser'
 import { redirect } from 'next/navigation'
 
 export default async function editPlaylist(playlistId: string, name: string) {
-    if (name.length < 5 || name.length > 20) return { err: 'Invalid Name' }
+    if (name.length < 5 || name.length > 20) return { error: 'Invalid Name' }
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
     const res = await authenticateUser()
-    if (res.err) redirect('/login')
+    if (res.error) redirect('/login')
 
     try {
         await Playlist.findOneAndUpdate({ _id: playlistId, owner_id: res.user_id }, { name: name })
         return { success: 'Name Changed Successfully' }
-    } catch (err) {
-        return { err: 'Something went wrong' }
+    } catch (error) {
+        return { error: 'Something went wrong' }
     }
 }

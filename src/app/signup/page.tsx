@@ -1,6 +1,6 @@
 'use client'
 
-import Signup from '@/actions/user/authentication/signup'
+import Signup from '@/actions/authentication/signup'
 import { Button } from '@/components/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn/ui/form'
 import { Input } from '@/components/shadcn/ui/input'
@@ -32,8 +32,8 @@ export default function Page() {
         setError('')
         setLoading(true)
         const res = await Signup(values)
-        if (res.err) {
-            setError(res.err)
+        if (res.error) {
+            setError(res.error)
             setLoading(false)
             return
         }

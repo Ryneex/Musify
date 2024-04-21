@@ -2,11 +2,11 @@ import getTrendingData from '@/actions/data/getTrendingData'
 import SongsSlider from '@/components/SongsSlider/SongsSlider'
 
 export default async function page() {
-    const { songs, err } = await getTrendingData()
-    if (err)
+    const { songs, error } = await getTrendingData()
+    if (error)
         return (
             <h1 className="flex h-full items-center justify-center font-medium text-red-400">
-                {err || 'Something went wrong and no reason was provided'}
+                {error || 'Something went wrong and no reason was provided'}
             </h1>
         )
     return (

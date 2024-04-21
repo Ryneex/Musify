@@ -6,8 +6,8 @@ export default async function callServerActionWithToast(Prom: Promise<any>) {
         position: 'top-center',
     })
     const res = await Prom
-    if (res?.err) {
-        toast.error(res.err, { id: ToastId })
+    if (res?.error) {
+        toast.error(res.error, { id: ToastId })
     } else {
         toast.success(res.success, { id: ToastId })
     }

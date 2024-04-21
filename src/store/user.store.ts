@@ -13,10 +13,10 @@ const userStore = proxy({
     favourites: null as null | Song[],
 
     async setUser() {
-        const { user, err } = await getUserInfo()
-        if (err || !user) return { err: 'Something went wrong' }
+        const { user, error } = await getUserInfo()
+        if (error || !user) return { error: 'Something went wrong' }
         this.user = user
-        if (err) {
+        if (error) {
             this.setUser()
             return
         }
@@ -26,8 +26,8 @@ const userStore = proxy({
 
     async addFavouriteSong(song: Song) {
         if (this.user.favourites.includes(song.id)) {
-            callServerActionWithToast(Promise.resolve({ err: 'Song already added' }))
-            return { err: 'Song already added' }
+            callServerActionWithToast(Promise.resolve({ error: 'Song already added' }))
+            return { error: 'Song already added' }
         }
         this.user.favourites.push(song.id)
         this.favourites?.push(song)

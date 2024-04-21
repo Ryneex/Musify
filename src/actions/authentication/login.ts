@@ -8,19 +8,19 @@ import createSession from '@/actions/session/createSession'
 
 export default async function Login(values: any) {
     const db = await dbconnect()
-    if (db.err) return { err: db.err }
+    if (db.error) return { error: db.error }
 
     const validate = loginScema.safeParse(values)
-    if (!validate.success) return { err: 'Invalid request' }
+    if (!validate.success) return { error: 'Invalid request' }
     try {
         const user = await User.findOne({ email: values.email })
-        if (!user) return { err: 'Incorrect email or password' }
+        if (!user) return { error: 'Incorrect email or password' }
         const doesPassMatch = await argon.verify(user.password, values.password)
-        if (!doesPassMatch) return { err: 'Incorrect email or password' }
+        if (!doesPassMatch) return { error: 'Incorrect email or password' }
         const res = await createSession(user._id)
-        if (res.err) return { err: res.err }
+        if (res.error) return { error: res.error }
         return { success: 'Successfully logged in' }
-    } catch (err) {
-        return { err: 'Something went wrong' }
+    } catch (error) {
+        return { error: 'Something went wrong' }
     }
 }

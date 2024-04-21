@@ -13,7 +13,7 @@ export default async function getSongsbyQuery(query: string) {
             })
             .json()
         return { songs: data.data.results }
-    } catch (err) {
-        return { err: 'Something went wrong when fetching Trending Data' }
+    } catch (error) {
+        return { error: 'Something went wrong when fetching Trending Data' }
     }
 }

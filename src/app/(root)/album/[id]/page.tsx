@@ -3,8 +3,8 @@ import SongsTable from './SongsTable'
 import { Metadata } from 'next'
 
 export async function generateMetadata({ params }: any) {
-    const { err, album } = await getAlbumsDetails(params.id)
-    if (err)
+    const { error, album } = await getAlbumsDetails(params.id)
+    if (error)
         return {
             title: 'Musify',
         } as Metadata
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: any) {
 }
 
 export default async function page({ params }: any) {
-    const { err, album } = await getAlbumsDetails(params.id)
-    if (err) return <div></div>
+    const { error, album } = await getAlbumsDetails(params.id)
+    if (error) return <div></div>
     return (
         <div className="overflow-hidden px-2 pt-0 sm:px-5 sm:pt-5">
             <div className="flex h-full flex-col overflow-hidden pb-5">

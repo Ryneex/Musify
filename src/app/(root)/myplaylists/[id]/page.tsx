@@ -5,8 +5,8 @@ import DownloadButton from '../../../../components/DownloadButton'
 import { Metadata } from 'next'
 
 export async function generateMetadata({ params }: any) {
-    const { playlist, err } = await getPlaylistWithSong(params.id)
-    if (err)
+    const { playlist, error } = await getPlaylistWithSong(params.id)
+    if (error)
         return {
             title: 'Musify',
         } as Metadata
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: any) {
 }
 
 export default async function page({ params }: any) {
-    const { playlist, err } = await getPlaylistWithSong(params.id)
-    if (err) redirect('/myplaylists')
+    const { playlist, error } = await getPlaylistWithSong(params.id)
+    if (error) redirect('/myplaylists')
     return (
         <div className="overflow-hidden px-2 pt-0 sm:px-5 sm:pt-5">
             <div className="flex h-full flex-col overflow-hidden pb-5">

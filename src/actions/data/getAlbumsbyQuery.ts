@@ -13,7 +13,7 @@ export default async function getAlbumsbyQuery(query: string) {
             })
             .json()
         return { albums: res.data.results }
-    } catch (err) {
-        return { err: 'Something went wrong when fetching Album Queries' }
+    } catch (error) {
+        return { error: 'Something went wrong when fetching Album Queries' }
     }
 }

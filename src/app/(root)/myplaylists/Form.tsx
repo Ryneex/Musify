@@ -21,8 +21,8 @@ export default function Form() {
         }
         setLoading(true)
         const res = await playlistStore.createPlaylist(input)
-        if (res.err) {
-            setError(res.err)
+        if (res.error) {
+            setError(res.error)
             setLoading(false)
             return
         }

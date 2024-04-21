@@ -7,15 +7,15 @@ import { redirect } from 'next/navigation'
 
 export default async function AddFavourite(songId: string) {
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
     const res = await authenticateUser()
-    if (res.err) redirect('/login')
+    if (res.error) redirect('/login')
     try {
         const user = await User.findOne({ _id: res.user_id })
-        if (user.favourites.includes(songId)) return { err: 'This song is already added' }
+        if (user.favourites.includes(songId)) return { error: 'This song is already added' }
         await User.findByIdAndUpdate(res.user_id, { favourites: [...user.favourites, songId] })
         return { success: 'Successfully added' }
     } catch (error) {
-        return { err: 'Something went wrong' }
+        return { error: 'Something went wrong' }
     }
 }

@@ -32,7 +32,7 @@ function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; ex
     // prettier-ignore
 
     useEffect(() => {
-        setIsMobile(/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/.test(navigator.userAgent))
+        setIsMobile(/Mobile|iP(hone|od|ad)|Android|BlackBerrory|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/.test(navigator.userAgent))
     }, [])
 
     return (

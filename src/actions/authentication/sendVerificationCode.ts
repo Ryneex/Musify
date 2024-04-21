@@ -7,14 +7,14 @@ import nodemailer from 'nodemailer'
 
 export default async function sendVerificationCode() {
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
     const res = await authenticateUser()
-    if (res.err && res.verified !== false) return { err: res.err }
+    if (res.error && res.verified !== false) return { error: res.error }
 
     try {
         if (res.verificationCode.expiresAt > Date.now()) {
             return {
-                err: res.verificationCode.expiresAt,
+                error: res.verificationCode.expiresAt,
             }
         }
         const code = Math.floor(Math.random() * 700000 + 200000)
@@ -35,7 +35,7 @@ export default async function sendVerificationCode() {
         await User.findOneAndUpdate({ email: res.email }, { verificationCode: { value: code, expiresAt } })
         return { success: expiresAt }
     } catch (error) {
-        return { err: 'Something went wrong' }
+        return { error: 'Something went wrong' }
     }
 }
 

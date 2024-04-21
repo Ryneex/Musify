@@ -7,16 +7,16 @@ import { redirect } from 'next/navigation'
 
 export default async function getUserInfo() {
     const db = await dbconnect()
-    if (db.err) return { err: 'Something went wrong' }
+    if (db.error) return { error: 'Something went wrong' }
     const res = await authenticateUser()
-    if (res.err) redirect('/login')
+    if (res.error) redirect('/login')
 
     try {
         const user = await User.findById(res.user_id)
-        if (!user) return { err: 'User not found' }
+        if (!user) return { error: 'User not found' }
         const { name, email, favourites } = user
         return { user: { name, email, favourites } }
-    } catch (err) {
-        return { err: 'Something went wrong' }
+    } catch (error) {
+        return { error: 'Something went wrong' }
     }
 }

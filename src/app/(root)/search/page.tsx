@@ -9,7 +9,7 @@ export default async function page({ searchParams }: any) {
     const songsReq = getSongsbyQuery(searchParams.query)
     const albumsReq = getAlbumsbyQuery(searchParams.query)
     const res = await Promise.all([songsReq, albumsReq])
-    if (res[0].err && res[1].err)
+    if (res[0].error && res[1].error)
         return (
             <h1 className="flex h-full items-center justify-center font-medium text-red-400">
                 Something went wrong and no reason was provided

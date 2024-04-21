@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/button'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/shadcn/ui/input-otp'
 import { REGEXP_ONLY_DIGITS } from 'input-otp'
-import sendVerificationCode from '@/actions/user/authentication/sendVerificationCode'
+import sendVerificationCode from '@/actions/authentication/sendVerificationCode'
 import { Duration } from 'luxon'
 import { toast } from 'sonner'
-import verifyAccount from '@/actions/user/authentication/verifyAccount'
+import verifyAccount from '@/actions/authentication/verifyAccount'
 import { useRouter } from 'next-nprogress-bar'
 import { MdNightsStay, MdOutlineLightMode } from 'react-icons/md'
 import userStore from '@/store/user.store'
@@ -26,8 +26,8 @@ export default function VerifyCard({ email }: any) {
         setLoading(true)
         const res = await sendVerificationCode()
         setLoading(false)
-        if (typeof res.err === 'string') {
-            toast.error(res.err, { position: 'top-center', id: toastId })
+        if (typeof res.error === 'string') {
+            toast.error(res.error, { position: 'top-center', id: toastId })
             return
         }
         if (res?.success) {
@@ -35,19 +35,19 @@ export default function VerifyCard({ email }: any) {
             toast.success('Email has been sent. Please confirm it', { position: 'top-center', id: toastId })
             setTimer(res.success - Date.now())
         }
-        if (res?.err) {
-            setExpiresAt(res.err)
+        if (res?.error) {
+            setExpiresAt(res.error)
             toast.error('Please wait before sending another one', { position: 'top-center', id: toastId })
-            setTimer(res.err - Date.now())
+            setTimer(res.error - Date.now())
         }
     }
 
     async function handleVerify() {
         setLoading(true)
         const res = await verifyAccount(Number(code))
-        if (res?.err) {
+        if (res?.error) {
             setLoading(false)
-            toast.error(res.err, { position: 'top-center' })
+            toast.error(res.error, { position: 'top-center' })
         }
         if (res.success) router.replace('/')
     }

@@ -20,13 +20,13 @@ export default function EditForm({
             setError('Name must be at least 5 characters')
             return
         } else if (editFormName.length > 20) {
-            setError('Name must be below 25 characters')
+            setError('Name must be below 20 characters')
             return
         }
         setLoading(true)
         const res = await playlistStore.editPlaylist(editFormPlaylistId, editFormName)
-        if (res.err) {
-            setError(res.err)
+        if (res.error) {
+            setError(res.error)
             setLoading(false)
             return
         }
