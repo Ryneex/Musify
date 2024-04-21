@@ -8,7 +8,7 @@ export default async function callServerActionWithToast(Prom: Promise<any>) {
     const res = await Prom
     if (res?.error) {
         toast.error(res.error, { id: ToastId })
-    } else {
+    } else if (res?.success) {
         toast.success(res.success, { id: ToastId })
     }
     return res

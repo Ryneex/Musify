@@ -1,10 +1,10 @@
-import authenticateUser from '@/actions/session/authenticateUser'
+import auth from '@/config/auth'
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 
 export default async function AuthProvider({ children }: { children: ReactNode }) {
-    const res = await authenticateUser()
+    const res = await auth.getCurrentUser()
     if (res.verified === false) redirect('/verify')
-    if (res.success) redirect('/')
+    if (!res.error) redirect('/')
     return <>{children}</>
 }

@@ -1,15 +1,13 @@
 'use server'
 
-import dbconnect from '@/db/dbconnect'
 import User from '@/db/models/user.model'
-import authenticateUser from '@/actions/session/authenticateUser'
 import nodemailer from 'nodemailer'
+import auth from '@/config/auth'
+import { redirect } from 'next/navigation'
 
 export default async function sendVerificationCode() {
-    const db = await dbconnect()
-    if (db.error) return { error: 'Something went wrong' }
-    const res = await authenticateUser()
-    if (res.error && res.verified !== false) return { error: res.error }
+    const res = await auth.getCurrentUser()
+    if (res.error) redirect('/login')
 
     try {
         if (res.verificationCode.expiresAt > Date.now()) {
