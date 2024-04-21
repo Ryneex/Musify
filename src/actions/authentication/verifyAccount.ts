@@ -2,17 +2,17 @@
 
 import dbconnect from '@/db/dbconnect'
 import User from '@/db/models/user.model'
-import authenticateUser from '@/actions/session/authenticateUser'
+import auth from '@/config/auth'
+import { redirect } from 'next/navigation'
 
 export default async function verifyAccount(code: number) {
     const db = await dbconnect()
     if (db.error) return { error: 'Something went wrong' }
-    const res = await authenticateUser()
-    if (res.verified !== false) return { error: res.error }
-
+    const res = await auth.getCurrentUser()
+    if (res.verified === true) return redirect('/')
     try {
         if (res.verificationCode.value === code && res.verificationCode?.expiresAt > Date.now()) {
-            await User.findByIdAndUpdate(res.user_id, { verified: true, verificationCode: {} })
+            await User.findByIdAndUpdate(res._id, { verified: true, verificationCode: {} })
             return { success: 'Verification successful' }
         } else return { error: 'Invalid verification code' }
     } catch (error) {

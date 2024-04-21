@@ -1,19 +1,17 @@
 'use server'
 
 import User from '@/db/models/user.model'
-import authenticateUser from '@/actions/session/authenticateUser'
-import dbconnect from '@/db/dbconnect'
 import { redirect } from 'next/navigation'
+import auth from '@/config/auth'
 
 export default async function RemoveFavourites(songId: string) {
-    const db = await dbconnect()
-    if (db.error) return { error: 'Something went wrong' }
-    const res = await authenticateUser()
-    if (res.error) redirect('/login')
+    const res = await auth.getCurrentUser()
+    if (!res.verified || res.error) redirect('/login')
+
     try {
-        const user = await User.findOne({ _id: res.user_id })
+        const user = await User.findOne({ _id: res._id })
         const favouriteList = user.favourites.filter((e: any) => !(e === songId))
-        await User.findByIdAndUpdate(res.user_id, { favourites: favouriteList })
+        await User.findByIdAndUpdate(res._id, { favourites: favouriteList })
         return { success: 'Successfully removed' }
     } catch (error) {
         return { error: 'Something went wrong' }

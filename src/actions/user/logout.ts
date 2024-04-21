@@ -1,10 +1,13 @@
 'use server'
+
 import auth from '@/config/auth'
+import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export default async function getUserInfo() {
+export default async function logout() {
     const res = await auth.getCurrentUser()
     if (!res.verified || res.error) redirect('/login')
-    const { name, email, favourites } = res
-    return { user: { name, email, favourites } }
+
+    cookies().delete('session_id')
+    redirect('/login')
 }

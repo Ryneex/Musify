@@ -13,13 +13,8 @@ const userStore = proxy({
     favourites: null as null | Song[],
 
     async setUser() {
-        const { user, error } = await getUserInfo()
-        if (error || !user) return { error: 'Something went wrong' }
+        const { user } = await getUserInfo()
         this.user = user
-        if (error) {
-            this.setUser()
-            return
-        }
         const data = await getSongsById(user.favourites)
         this.favourites = data.songs || []
     },

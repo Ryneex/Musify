@@ -7,7 +7,6 @@ import {
     DropdownMenuTrigger,
 } from '@/components/shadcn/ui/dropdown-menu'
 import { BiLogOut } from 'react-icons/bi'
-import Cookie from 'js-cookie'
 import {
     Dialog,
     DialogClose,
@@ -23,6 +22,7 @@ import { useSnapshot } from 'valtio'
 import { useState } from 'react'
 import userStore from '@/store/user.store'
 import DeleteUser from '@/actions/user/deleteUser'
+import logout from '@/actions/user/logout'
 
 export default function ProfileButton() {
     const { user } = useSnapshot(userStore)
@@ -50,12 +50,7 @@ export default function ProfileButton() {
                     </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="mr-2">
-                    <DropdownMenuItem
-                        onClick={() => {
-                            Cookie.remove('token_exists')
-                            window.location.pathname = '/login'
-                        }}
-                    >
+                    <DropdownMenuItem onClick={() => logout()}>
                         Logout
                         <DropdownMenuShortcut>
                             <BiLogOut className="ml-3 text-lg" />
