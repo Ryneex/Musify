@@ -11,7 +11,7 @@ export default async function downloadSongs({ name, songs }: Prop) {
     const zip = new JSZip()
     const songFolder = zip.folder(name || 'songs')
     let counter = 0
-    const toastId = toast.loading(`${0}/${songs.length}songs downloaded`, {
+    const toastId = toast.loading(`${0}/${songs.length} songs downloaded`, {
         position: 'top-center',
         cancel: {
             label: 'Hide',
@@ -28,14 +28,8 @@ export default async function downloadSongs({ name, songs }: Prop) {
         })
     )
 
-    res.forEach((e) => {
-        songFolder!.file(e.name, e.blob)
-        songFolder!.file(e.name, e.blob)
-        songFolder!.file(e.name, e.blob)
-    })
-
+    res.forEach((e) => songFolder!.file(e.name, e.blob))
     const zipBlob = await zip.generateAsync({ type: 'blob' })
-
     const url = URL.createObjectURL(zipBlob)
     const a = document.createElement('a')
     a.href = url
