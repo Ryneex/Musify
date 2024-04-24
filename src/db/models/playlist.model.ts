@@ -13,7 +13,7 @@ const playlistScema = new mongoose.Schema({
         type: Array,
         default: [],
     },
-} as mongoose.SchemaDefinitionProperty)
+} as { [key: string]: mongoose.SchemaDefinitionProperty })
 
 const Playlist = mongoose.models.Playlist || mongoose.model('Playlist', playlistScema)
 

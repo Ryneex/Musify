@@ -7,7 +7,7 @@ import auth from '@/config/auth'
 export default async function AddFavourite(songId: string) {
     const res = await auth.getCurrentUser()
     if (!res.verified || res.error) redirect('/login')
-        
+
     try {
         const user = await User.findOne({ _id: res._id })
         if (user.favourites.includes(songId)) return { error: 'This song is already added' }

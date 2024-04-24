@@ -7,7 +7,9 @@ export default async function page({ params }: any) {
     const { error, songs } = await getSongsById([params.id])
     if (error)
         return (
-            <div className="flex h-full w-full items-center justify-center text-black/70 dark:text-white/70">{error}</div>
+            <div className="flex h-full w-full items-center justify-center text-black/70 dark:text-white/70">
+                {error}
+            </div>
         )
 
     const song: Song = songs[0]

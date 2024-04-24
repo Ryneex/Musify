@@ -90,12 +90,30 @@ export default function VerifyCard({ email }: any) {
                                 pattern={REGEXP_ONLY_DIGITS}
                             >
                                 <InputOTPGroup>
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={0} />
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={1} />
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={2} />
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={3} />
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={4} />
-                                    <InputOTPSlot className="h-12 w-12 dark:text-white sm:w-16 dark:border-white/20" index={5} />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={0}
+                                    />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={1}
+                                    />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={2}
+                                    />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={3}
+                                    />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={4}
+                                    />
+                                    <InputOTPSlot
+                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        index={5}
+                                    />
                                 </InputOTPGroup>
                             </InputOTP>
                             <div className="flex justify-between text-xs">

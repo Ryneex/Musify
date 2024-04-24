@@ -1,5 +1,5 @@
-import { type Model, Schema, model, models, SchemaDefinitionProperty } from "mongoose";
-import { v4 } from "uuid";
+import { type Model, Schema, model, models, SchemaDefinitionProperty } from 'mongoose'
+import { v4 } from 'uuid'
 
 export default function getSessionModel(UserModel: Model<any>, name: string) {
     // prettier-ignore
