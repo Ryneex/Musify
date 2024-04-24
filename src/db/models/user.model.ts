@@ -23,7 +23,8 @@ const userScema = new mongoose.Schema({
         value: Number,
         expiresAt: Date,
     },
-} as mongoose.SchemaDefinitionProperty)
+    createdAt: Date,
+} as { [key: string]: mongoose.SchemaDefinitionProperty })
 
 const User = mongoose.models.User || mongoose.model('User', userScema)
 
