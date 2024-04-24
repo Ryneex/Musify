@@ -24,7 +24,7 @@ export default async function page({ params }: any) {
                     />
                 </div>
                 <div className="flex flex-col justify-center gap-1 overflow-hidden">
-                    <h1 className="overflow-hidden truncate text-lg font-bold dark:text-white sm:text-2xl md:text-3xl lg:text-4xl">
+                    <h1 className="overflow-hidden truncate text-lg font-bold sm:text-2xl md:text-3xl lg:text-4xl">
                         {song?.name}
                     </h1>
                     <span className="overflow-hidden truncate text-xs text-black/80 dark:text-white/80 sm:text-sm">

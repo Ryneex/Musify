@@ -17,7 +17,7 @@ export default function Page() {
         <div className="overflow-hidden pl-2 pt-0 sm:pl-5 sm:pt-5">
             <div className="flex h-full flex-col gap-3 overflow-hidden pb-5">
                 <div className="flex shrink-0 flex-col justify-center overflow-hidden">
-                    <h1 className="overflow-hidden truncate text-lg font-bold dark:text-white sm:text-2xl md:text-3xl lg:text-4xl">
+                    <h1 className="overflow-hidden truncate text-lg font-bold sm:text-2xl md:text-3xl lg:text-4xl">
                         My Playlists
                     </h1>
                 </div>

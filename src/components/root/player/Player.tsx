@@ -135,7 +135,7 @@ export default function Player() {
                         </Tooltip>
                     </div>
                     {/* Volume control : hidden until 1024px */}
-                    <div className="flex grow basis-1/6 items-center justify-end gap-2 text-black dark:text-white lg:hidden">
+                    <div className="flex grow basis-1/6 items-center justify-end gap-2 lg:hidden">
                         <div className="cursor-pointer text-2xl" onClick={() => playerStore.toggleVolume()}>
                             {volume === 0 ? <MdVolumeOff /> : <MdVolumeUp />}
                         </div>
@@ -167,7 +167,7 @@ export default function Player() {
                 </div>
             </div>
             {/* Volume control : visible until 1024px */}
-            <div className="hidden basis-1/6 items-center justify-end gap-2 text-black dark:text-white lg:flex">
+            <div className="hidden basis-1/6 items-center justify-end gap-2 lg:flex">
                 <div className="cursor-pointer text-2xl" onClick={() => playerStore.toggleVolume()}>
                     {volume === 0 ? <MdVolumeOff /> : <MdVolumeUp />}
                 </div>

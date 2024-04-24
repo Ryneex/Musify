@@ -1,6 +1,18 @@
-import mongoose from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 
-const userScema = new mongoose.Schema(
+interface IUser {
+    name: string
+    email: string
+    verified: boolean
+    favourites: string[]
+    password: string
+    verificationCode: {
+        value: number
+        expiresAt: Date
+    }
+}
+
+const schema = new mongoose.Schema(
     {
         name: String,
         email: {
@@ -28,6 +40,6 @@ const userScema = new mongoose.Schema(
     { timestamps: true }
 )
 
-const User = mongoose.models.User || mongoose.model('User', userScema)
+const User: Model<IUser> = mongoose.models.User || mongoose.model('User', schema)
 
 export default User

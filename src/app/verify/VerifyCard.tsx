@@ -68,7 +68,7 @@ export default function VerifyCard({ email }: any) {
         <div className="flex h-screen items-center justify-center dark:bg-zinc-950 sm:bg-slate-50">
             <div
                 onClick={() => userStore.toggleTheme()}
-                className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:text-white dark:hover:bg-white/30"
+                className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30"
             >
                 <div className="flex h-full w-full items-center justify-center">
                     <MdNightsStay className="hidden dark:block" />
@@ -81,7 +81,7 @@ export default function VerifyCard({ email }: any) {
             <div className="w-full max-w-[640px] rounded-xl bg-white p-10 dark:bg-zinc-900 sm:shadow-md">
                 {sendNowClicked ? (
                     <div className="flex flex-col items-center gap-4">
-                        <h2 className="text-sm dark:text-white">Enter your verification code</h2>
+                        <h2 className="text-sm">Enter your verification code</h2>
                         <div className="flex flex-col gap-1">
                             <InputOTP
                                 value={code}
@@ -91,34 +91,34 @@ export default function VerifyCard({ email }: any) {
                             >
                                 <InputOTPGroup>
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={0}
                                     />
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={1}
                                     />
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={2}
                                     />
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={3}
                                     />
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={4}
                                     />
                                     <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 dark:text-white sm:w-16"
+                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
                                         index={5}
                                     />
                                 </InputOTPGroup>
                             </InputOTP>
                             <div className="flex justify-between text-xs">
                                 <span
-                                    className={`${!(timer == 0 || loading) && 'pointer-events-none opacity-70  dark:opacity-80'} dark:text-white`}
+                                    className={`${!(timer == 0 || loading) && 'pointer-events-none opacity-70  dark:opacity-80'}`}
                                 >
                                     Didn&apos;t receive it?
                                     <span

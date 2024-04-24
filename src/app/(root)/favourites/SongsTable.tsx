@@ -8,7 +8,7 @@ type Props = {
 
 export default function SongsTable({ songs }: Props) {
     return (
-        <div className="flex h-full w-full flex-col overflow-hidden rounded-md border text-black dark:border-white/10 dark:text-white/60">
+        <div className="flex h-full w-full flex-col overflow-hidden rounded-md border dark:border-white/10 dark:text-white/60">
             <div className="flex h-12 shrink-0 items-center border-b text-sm font-medium dark:border-white/10 dark:text-white/80 sm:gap-2 ">
                 <div className="w-9 shrink-0 text-center sm:w-12">#</div>
                 <div className="basis-full sm:basis-1/2">Title</div>

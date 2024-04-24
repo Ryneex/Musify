@@ -11,7 +11,7 @@ export default function TopNavigation() {
             <Searchbar />
             <div
                 onClick={() => userStore.toggleTheme()}
-                className="hidden aspect-square h-full max-h-9 cursor-pointer select-none items-center justify-center rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:text-white dark:hover:bg-white/30 sm:flex"
+                className="hidden aspect-square h-full max-h-9 cursor-pointer select-none items-center justify-center rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30 sm:flex"
             >
                 <MdNightsStay className="hidden dark:block" />
                 <MdOutlineLightMode className="block dark:hidden" />

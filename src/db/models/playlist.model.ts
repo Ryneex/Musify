@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const playlistScema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -15,6 +15,6 @@ const playlistScema = new mongoose.Schema({
     },
 } as { [key: string]: mongoose.SchemaDefinitionProperty })
 
-const Playlist = mongoose.models.Playlist || mongoose.model('Playlist', playlistScema)
+const Playlist = mongoose.models.Playlist || mongoose.model('Playlist', schema)
 
 export default Playlist
