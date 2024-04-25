@@ -7,7 +7,6 @@ import { Input } from '@/components/shadcn/ui/input'
 import loginScema from '@/schemas/login'
 import userStore from '@/store/user.store'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next-nprogress-bar'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -18,7 +17,7 @@ import { z } from 'zod'
 export default function Page() {
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState(false)
-    const router = useRouter()
+
     const form = useForm<z.infer<typeof loginScema>>({
         resolver: zodResolver(loginScema),
         defaultValues: {
@@ -37,7 +36,7 @@ export default function Page() {
             return
         }
         setError('')
-        router.replace('/')
+        window.location.href = '/'
     }
 
     return (
@@ -103,7 +102,7 @@ export default function Page() {
                             )}
                         />
                         {error && (
-                            <div className="flex items-center gap-3 rounded-md bg-red-100 px-3 py-3 text-sm font-medium text-red-500">
+                            <div className="flex items-center gap-3 rounded-md bg-red-100 px-3 py-3 text-sm font-medium text-red-400 dark:bg-red-300/10">
                                 <IoAlertCircleOutline className="text-base" /> {error}
                             </div>
                         )}

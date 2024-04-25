@@ -15,6 +15,7 @@ export default function VerifyCard() {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const verifyEmail = z.string().email()
+    const [mailSent, setMailSent] = useState(false)
 
     async function sendEmail() {
         const isEmail = verifyEmail.safeParse(email)
@@ -28,15 +29,14 @@ export default function VerifyCard() {
         if (typeof res.error === 'string') {
             return toast.error(res.error, { position: 'top-center', id: toastId })
         }
-        if (res?.success) {
-            toast.success(res.success, { position: 'top-center', id: toastId })
-        }
         if (res?.error) {
             toast.error(
                 `Please wait ${Duration.fromMillis(Date.parse(res.error.toString()) - Date.now()).toFormat('m:ss')} minute before sending another one`,
                 { position: 'top-center', id: toastId }
             )
         }
+        setMailSent(true)
+        toast.success(res.success, { position: 'top-center', id: toastId })
     }
 
     return (
@@ -53,19 +53,26 @@ export default function VerifyCard() {
             <div className="fixed">
                 <Toaster />
             </div>
-            <div className="w-full max-w-md rounded-xl bg-white p-10 dark:bg-zinc-900 sm:shadow-md">
-                <div className="flex flex-col items-center gap-4">
-                    <h2 className="text-sm">Enter your email address</h2>
-                    <Input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full"
-                        placeholder="john@example.com"
-                    />
-                    <Button loading={loading} onClick={sendEmail} className="mt-2 w-full">
-                        Reset Password
-                    </Button>
-                </div>
+            <div className="mx-3 w-full max-w-md rounded-xl bg-white p-5 dark:bg-zinc-900 sm:p-10 sm:shadow-md">
+                {!mailSent ? (
+                    <div className="flex flex-col items-center gap-4">
+                        <h2 className="text-sm">Enter your email address</h2>
+                        <Input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full"
+                            placeholder="john@example.com"
+                        />
+                        <Button loading={loading} onClick={sendEmail} className="mt-2 w-full">
+                            Reset Password
+                        </Button>
+                    </div>
+                ) : (
+                    <span className="block w-full text-center text-sm">
+                        A password recovery email has been sent to{' '}
+                        <span className="text-blue-600 dark:text-blue-400">{email}</span>
+                    </span>
+                )}
             </div>
         </div>
     )

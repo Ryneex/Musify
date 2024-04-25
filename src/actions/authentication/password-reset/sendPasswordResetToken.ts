@@ -27,7 +27,6 @@ export default async function sendPasswordResetToken(email: string) {
                 pass: process.env.EMAIL_PASSWORD,
             },
         })
-        console.log(`${process.env.HOST_URI}/forgot-password/${token}`)
         await transporter.sendMail({
             from: `Musify <${process.env.EMAIL}>`,
             to: email,

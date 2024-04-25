@@ -12,7 +12,11 @@ export default async function verifyAccount(code: number) {
     if (res.verified === true) return redirect('/')
     try {
         if (res.verificationCode.value === code && res.verificationCode?.expiresAt > Date.now()) {
-            await User.findByIdAndUpdate(res._id, { verified: true, verificationCode: {} })
+            await User.findByIdAndUpdate(
+                res._id,
+                { verified: true, $unset: { verificationCode: true } },
+                { strict: false }
+            )
             return { success: 'Verification successful' }
         } else return { error: 'Invalid verification code' }
     } catch (error) {

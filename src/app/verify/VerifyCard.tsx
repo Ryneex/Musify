@@ -9,7 +9,6 @@ import sendVerificationCode from '@/actions/authentication/verify/sendVerificati
 import { Duration } from 'luxon'
 import { toast } from 'sonner'
 import verifyAccount from '@/actions/authentication/verify/verifyAccount'
-import { useRouter } from 'next-nprogress-bar'
 import { MdNightsStay, MdOutlineLightMode } from 'react-icons/md'
 import userStore from '@/store/user.store'
 import logout from '@/actions/user/logout'
@@ -19,13 +18,11 @@ export default function VerifyCard({ email }: any) {
     const [sendNowClicked, setSendNowClicked] = useState(false)
     const [timer, setTimer] = useState(0)
     const [code, setCode] = useState('')
-    const router = useRouter()
 
     async function sendCode() {
         const toastId = toast.loading('Sending Verification Code', { position: 'top-center' })
         setLoading(true)
         const res = await sendVerificationCode()
-        console.log(res.error - Date.now())
         setLoading(false)
         if (typeof res.error === 'string') {
             return toast.error(res.error, { position: 'top-center', id: toastId })
@@ -47,7 +44,7 @@ export default function VerifyCard({ email }: any) {
             setLoading(false)
             toast.error(res.error, { position: 'top-center' })
         }
-        if (res.success) router.replace('/')
+        window.location.href = '/'
     }
 
     useEffect(() => {
@@ -75,7 +72,7 @@ export default function VerifyCard({ email }: any) {
             <div className="fixed">
                 <Toaster />
             </div>
-            <div className="w-full max-w-[640px] rounded-xl bg-white p-10 dark:bg-zinc-900 sm:shadow-md">
+            <div className="mx-3 w-full max-w-2xl rounded-xl bg-white p-5 dark:bg-zinc-900 sm:p-10 sm:shadow-md">
                 {sendNowClicked ? (
                     <div className="flex flex-col items-center gap-4">
                         <h2 className="text-sm">Enter your verification code</h2>
@@ -131,8 +128,8 @@ export default function VerifyCard({ email }: any) {
                         </h1>
                         <p className="text-center text-sm dark:text-white/80">
                             A verification email will be sent to{' '}
-                            <span className="text-indigo-600 dark:text-indigo-400">{email}</span>. make sure to check
-                            spam mail. Please click on verify now to proceed
+                            <span className="text-blue-600 dark:text-blue-400">{email}</span>. make sure to check spam
+                            mail. Please click on verify now to proceed
                         </p>
                         <div className="w-full">
                             <Button
@@ -148,7 +145,7 @@ export default function VerifyCard({ email }: any) {
                             </Button>
                             <span
                                 onClick={async () => await logout()}
-                                className="cursor-pointer text-xs text-blue-400 hover:underline"
+                                className="cursor-pointer text-xs text-blue-600 hover:underline dark:text-blue-400"
                             >
                                 Logout
                             </span>
