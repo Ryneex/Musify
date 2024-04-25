@@ -30,7 +30,7 @@ export default function VerifyCard() {
             return toast.error(res.error, { position: 'top-center', id: toastId })
         }
         if (res?.error) {
-            toast.error(
+            return toast.error(
                 `Please wait ${Duration.fromMillis(Date.parse(res.error.toString()) - Date.now()).toFormat('m:ss')} minute before sending another one`,
                 { position: 'top-center', id: toastId }
             )
