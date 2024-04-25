@@ -6,4 +6,5 @@
     "singleQuote": true,
     "singleAttributePerLine": false,
     "plugins": ["prettier-plugin-tailwindcss"]
+    
 }
