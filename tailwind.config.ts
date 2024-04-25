@@ -38,7 +38,6 @@ const config = {
             },
         },
     },
-    
     plugins: [require('tailwindcss-animate'), require('@tailwindcss/container-queries')],
 } satisfies Config
 
