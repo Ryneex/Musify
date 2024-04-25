@@ -9,8 +9,7 @@ export default async function RemoveFavourites(songId: string) {
     if (!res.verified || res.error) redirect('/login')
 
     try {
-        const user = await User.findOne({ _id: res._id })
-        const favouriteList = user.favourites.filter((e: any) => !(e === songId))
+        const favouriteList = res.favourites.filter((e: any) => !(e === songId))
         await User.findByIdAndUpdate(res._id, { favourites: favouriteList })
         return { success: 'Successfully removed' }
     } catch (error) {

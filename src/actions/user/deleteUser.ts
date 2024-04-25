@@ -13,9 +13,7 @@ export default async function DeleteUser(password: string) {
     if (!res.verified || res.error) redirect('/login')
 
     try {
-        const user = await User.findById(res._id)
-        if (!user) return { error: 'User not found' }
-        const doesPassMatch = await argon.verify(user.password, password)
+        const doesPassMatch = await argon.verify(res.password, password)
         if (!doesPassMatch) return { error: 'Incorrect password' }
         await auth.deleteCurrentUsersAllSessions()
         await Playlist.deleteMany({ owner_id: res._id })
