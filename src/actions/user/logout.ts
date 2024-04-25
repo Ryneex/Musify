@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 
 export default async function logout() {
     const res = await auth.getCurrentUser()
-    if (!res.verified || res.error) redirect('/login')
+    if (res.error) redirect('/login')
     try {
         await auth.deleteCurrentUsersSession()
         cookies().delete('session_id')

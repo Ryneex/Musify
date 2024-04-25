@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/button'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/shadcn/ui/input-otp'
 import { REGEXP_ONLY_DIGITS } from 'input-otp'
-import sendVerificationCode from '@/actions/authentication/sendVerificationCode'
+import sendVerificationCode from '@/actions/authentication/verify/sendVerificationCode'
 import { Duration } from 'luxon'
 import { toast } from 'sonner'
-import verifyAccount from '@/actions/authentication/verifyAccount'
+import verifyAccount from '@/actions/authentication/verify/verifyAccount'
 import { useRouter } from 'next-nprogress-bar'
 import { MdNightsStay, MdOutlineLightMode } from 'react-icons/md'
 import userStore from '@/store/user.store'
+import logout from '@/actions/user/logout'
 
 export default function VerifyCard({ email }: any) {
     const [loading, setLoading] = useState(false)
     const [sendNowClicked, setSendNowClicked] = useState(false)
-    const [expiresAt, setExpiresAt] = useState(0)
     const [timer, setTimer] = useState(0)
     const [code, setCode] = useState('')
     const router = useRouter()
@@ -25,18 +25,16 @@ export default function VerifyCard({ email }: any) {
         const toastId = toast.loading('Sending Verification Code', { position: 'top-center' })
         setLoading(true)
         const res = await sendVerificationCode()
+        console.log(res.error - Date.now())
         setLoading(false)
         if (typeof res.error === 'string') {
-            toast.error(res.error, { position: 'top-center', id: toastId })
-            return
+            return toast.error(res.error, { position: 'top-center', id: toastId })
         }
         if (res?.success) {
-            setExpiresAt(res.success)
             toast.success('Email has been sent. Please confirm it', { position: 'top-center', id: toastId })
             setTimer(res.success - Date.now())
         }
         if (res?.error) {
-            setExpiresAt(res.error)
             toast.error('Please wait before sending another one', { position: 'top-center', id: toastId })
             setTimer(res.error - Date.now())
         }
@@ -53,16 +51,15 @@ export default function VerifyCard({ email }: any) {
     }
 
     useEffect(() => {
-        if (!expiresAt) return
         const interval = setInterval(() => {
-            const timeLeft = expiresAt - Date.now()
-            setTimer(() => (timeLeft > 0 ? timeLeft : 0))
+            setTimer((prev) => {
+                if (prev - 1000 <= 0) return 0
+                return prev - 1000
+            })
         }, 1000)
 
-        return () => {
-            clearInterval(interval)
-        }
-    }, [expiresAt])
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <div className="flex h-screen items-center justify-center dark:bg-zinc-950 sm:bg-slate-50">
@@ -90,30 +87,12 @@ export default function VerifyCard({ email }: any) {
                                 pattern={REGEXP_ONLY_DIGITS}
                             >
                                 <InputOTPGroup>
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={0}
-                                    />
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={1}
-                                    />
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={2}
-                                    />
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={3}
-                                    />
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={4}
-                                    />
-                                    <InputOTPSlot
-                                        className="h-12 w-12 dark:border-white/20 sm:w-16"
-                                        index={5}
-                                    />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={0} />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={1} />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={2} />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={3} />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={4} />
+                                    <InputOTPSlot className="h-12 w-12 dark:border-white/20 sm:w-16" index={5} />
                                 </InputOTPGroup>
                             </InputOTP>
                             <div className="flex justify-between text-xs">
@@ -155,17 +134,25 @@ export default function VerifyCard({ email }: any) {
                             <span className="text-indigo-600 dark:text-indigo-400">{email}</span>. make sure to check
                             spam mail. Please click on verify now to proceed
                         </p>
-                        <Button
-                            disabled={loading}
-                            loading={loading}
-                            onClick={() => {
-                                sendCode()
-                                setSendNowClicked(true)
-                            }}
-                            className="w-full"
-                        >
-                            Send Now
-                        </Button>
+                        <div className="w-full">
+                            <Button
+                                disabled={loading}
+                                loading={loading}
+                                onClick={() => {
+                                    sendCode()
+                                    setSendNowClicked(true)
+                                }}
+                                className="w-full"
+                            >
+                                Send Now
+                            </Button>
+                            <span
+                                onClick={async () => await logout()}
+                                className="cursor-pointer text-xs text-blue-400 hover:underline"
+                            >
+                                Logout
+                            </span>
+                        </div>
                     </div>
                 )}
             </div>

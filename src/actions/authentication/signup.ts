@@ -15,8 +15,8 @@ export default async function Signup(values: z.infer<typeof signupScema>) {
     if (!validate.success) return { error: 'Invalid request' }
     try {
         const hash = await argon.hash(values.password)
-        const user = await User.create({ ...values, password: hash })
-        const res = await auth.createSession({ userId: user._id, expiresIn: 1000 * 60 * 60 * 24 * 30 })
+        const user = await User.create({ ...validate.data, password: hash })
+        const res = await auth.createSession({ userId: user._id.toString(), expiresIn: 1000 * 60 * 60 * 24 * 30 })
         if (res.error) return { error: res.error }
         return { success: 'Account created successfully' }
     } catch (error: any) {

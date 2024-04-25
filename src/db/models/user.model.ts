@@ -6,8 +6,12 @@ interface IUser {
     verified: boolean
     favourites: string[]
     password: string
-    verificationCode: {
+    verificationCode?: {
         value: number
+        expiresAt: Date
+    }
+    passwordReset?: {
+        token: string
         expiresAt: Date
     }
 }
@@ -19,6 +23,7 @@ const schema = new mongoose.Schema(
             type: String,
             unique: true,
             required: true,
+            lowercase: true,
         },
         verified: {
             type: Boolean,
@@ -34,6 +39,10 @@ const schema = new mongoose.Schema(
         },
         verificationCode: {
             value: Number,
+            expiresAt: Date,
+        },
+        passwordReset: {
+            token: String,
             expiresAt: Date,
         },
     } as { [key: string]: mongoose.SchemaDefinitionProperty },

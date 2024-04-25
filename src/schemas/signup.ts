@@ -8,15 +8,16 @@ const signupScema = z.object({
         })
         .max(20, {
             message: 'Maximum length is 20 characters',
-        }),
-    email: z.string().email(),
+        })
+        .trim(),
+    email: z.string().email().toLowerCase().trim(),
     password: z
         .string()
         .min(5, {
             message: 'At least 5 characters required',
         })
-        .max(100, {
-            message: 'Maximum length is 100 characters',
+        .max(5000, {
+            message: 'Maximum length is 5000 characters',
         }),
 })
 
