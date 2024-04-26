@@ -18,6 +18,9 @@ export default function Player() {
     const [currentTime, setCurrentTime] = useState(0)
     const { currentSong, Playing, volume, shuffle } = useSnapshot(playerStore)
 
+    // It will track if audio player is playing and based on that it will change the play/pause icon
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+
     // Formats song Duration
     const duration = useMemo(() => {
         const time = Duration.fromObject({ second: Number(currentSong.duration) || 0 }).toFormat('mm:ss')
@@ -33,8 +36,8 @@ export default function Player() {
     // Handles Playback
     useEffect(() => {
         if (!audio) return
-        Playing && isPointerDown === false ? audio.play().catch(() => null) : audio.pause()
-    }, [Playing, audio, isPointerDown, currentSong])
+        Playing ? audio.play().catch(() => null) : audio.pause()
+    }, [Playing, audio, currentSong])
 
     // Resets currentTime , SliderValue and plays the song when currentSong changes
     useEffect(() => {
@@ -55,11 +58,10 @@ export default function Player() {
     function updateCurrentTime([e]: any) {
         if (!audio?.duration) return
         setSliderValue(e)
-        audio.currentTime = (e / 100) * audio.duration
-        setCurrentTime(audio.currentTime)
+        setCurrentTime((sliderValue / 100) * audio.duration)
     }
 
-    //Volume controls
+    // Volume controls
     useEffect(() => {
         if (audio?.volume === undefined) return
         audio.volume = volume
@@ -88,6 +90,8 @@ export default function Player() {
                     audio?.load()
                     Playing && isPointerDown === false && audio.play().catch(() => null)
                 }}
+                onPause={() => setIsAudioPlaying(false)}
+                onPlay={() => setIsAudioPlaying(true)}
             ></audio>
             {/* Information About Current Song */}
             <div className="hidden basis-1/6 items-center gap-2 overflow-hidden lg:flex">
@@ -119,7 +123,7 @@ export default function Player() {
                             className="flex aspect-square w-6 cursor-pointer items-center justify-center  overflow-hidden rounded-full text-[20px]"
                             onClick={() => currentSong.downloadUrl && playerStore.togglePlay()}
                         >
-                            {Playing ? <IoIosPause /> : <IoPlayOutline className="ml-1" />}
+                            {isAudioPlaying ? <IoIosPause /> : <IoPlayOutline className="ml-1" />}
                         </div>
                         <MdSkipNext onClick={() => playerStore.playNextSong()} className="cursor-pointer" />
                         <Tooltip delayDuration={100}>
@@ -157,7 +161,10 @@ export default function Player() {
                     <span className="text-xs text-black/90 dark:text-white/50">{formattedCurrentTime}</span>
                     <Slider
                         onPointerDown={(e) => e.button === 0 && setIsPointerDown(true)}
-                        onPointerUp={(e) => e.button === 0 && setIsPointerDown(false)}
+                        onPointerUp={(e) => {
+                            e.button === 0 && setIsPointerDown(false)
+                            audio.currentTime = (sliderValue / 100) * audio.duration
+                        }}
                         onValueChange={updateCurrentTime}
                         value={[sliderValue]}
                         max={100}
