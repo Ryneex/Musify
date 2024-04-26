@@ -24,7 +24,7 @@ import downloadSong from '@/helpers/downloadSong'
 import Link from 'next/link'
 
 function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; expanded: boolean }) {
-    const { currentSong, Playing } = useSnapshot(playerStore)
+    const { currentSong, isAudioPlaying } = useSnapshot(playerStore)
     const { user } = useSnapshot(userStore)
     const { playlists } = useSnapshot(playlistStore)
     const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
@@ -57,7 +57,7 @@ function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; ex
                         }}
                         className="cursor-pointer text-3xl text-blue-400 transition duration-300 hover:scale-110 md:text-4xl"
                     >
-                        {currentSong.id === song.id && Playing ? <MdOutlinePauseCircle /> : <FaRegCirclePlay />}
+                        {currentSong.id === song.id && isAudioPlaying ? <MdOutlinePauseCircle /> : <FaRegCirclePlay />}
                     </div>
                 </div>
                 <div className="absolute bottom-0 left-0 size-10 rounded-full bg-black blur-xl"></div>

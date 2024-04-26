@@ -16,10 +16,7 @@ export default function Player() {
     const [sliderValue, setSliderValue] = useState(0)
     const [isPointerDown, setIsPointerDown] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
-    const { currentSong, Playing, volume, shuffle } = useSnapshot(playerStore)
-
-    // It will track if audio player is playing and based on that it will change the play/pause icon
-    const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+    const { currentSong, Playing, volume, shuffle, isAudioPlaying } = useSnapshot(playerStore)
 
     // Formats song Duration
     const duration = useMemo(() => {
@@ -90,8 +87,8 @@ export default function Player() {
                     audio?.load()
                     Playing && isPointerDown === false && audio.play().catch(() => null)
                 }}
-                onPause={() => setIsAudioPlaying(false)}
-                onPlay={() => setIsAudioPlaying(true)}
+                onPause={() => (playerStore.isAudioPlaying = false)}
+                onPlay={() => (playerStore.isAudioPlaying = true)}
             ></audio>
             {/* Information About Current Song */}
             <div className="hidden basis-1/6 items-center gap-2 overflow-hidden lg:flex">

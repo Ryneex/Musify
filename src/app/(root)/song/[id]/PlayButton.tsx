@@ -27,7 +27,7 @@ import { ResetIcon } from '@radix-ui/react-icons'
 import { LuPauseCircle } from 'react-icons/lu'
 
 export default function PlayButton({ song }: { song: Song }) {
-    const { currentSong, Playing } = useSnapshot(playerStore)
+    const { currentSong, isAudioPlaying } = useSnapshot(playerStore)
     const { user } = useSnapshot(userStore)
     const { playlists } = useSnapshot(playlistStore)
     const isFavourite = useMemo(() => user.favourites.includes(song.id), [user.favourites, song])
@@ -41,7 +41,7 @@ export default function PlayButton({ song }: { song: Song }) {
                 }}
                 className="flex aspect-square w-8 cursor-pointer items-center justify-center overflow-hidden text-blue-400"
             >
-                {currentSong.id === song.id && Playing ? (
+                {currentSong.id === song.id && isAudioPlaying ? (
                     <LuPauseCircle className="size-8" />
                 ) : (
                     <FaRegCirclePlay className="size-[30px]" />

@@ -17,7 +17,7 @@ type Props = {
     setSongs: any
 }
 export default function SongsTableRow({ song, i, playlistId, setSongs, songList = [] }: Props) {
-    const { currentSong, Playing } = useSnapshot(playerStore)
+    const { currentSong, isAudioPlaying } = useSnapshot(playerStore)
     const [isMouseOver, setIsMouseOver] = useState(false)
     const duration = useMemo(() => {
         const time = Duration.fromObject({ second: Number(song?.duration) || 0 }).toFormat('mm:ss')
@@ -44,7 +44,7 @@ export default function SongsTableRow({ song, i, playlistId, setSongs, songList 
                                 playerStore.togglePlay()
                             }}
                         >
-                            {Playing && currentSong.id === song.id ? (
+                            {isAudioPlaying && currentSong.id === song.id ? (
                                 <IoIosPause className="text-[20px]" />
                             ) : (
                                 <IoPlayOutline className="text-[20px]" />

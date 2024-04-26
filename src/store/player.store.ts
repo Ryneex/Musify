@@ -6,6 +6,8 @@ const playerStore = proxy({
     currentSong: {} as Song,
     SongList: [] as Song[],
     Playing: false,
+    // It will track if audio player is playing and based on that it will change the play/pause icon
+    isAudioPlaying: false,
     volume: 1,
     playedSongs: [] as any[],
     shuffle: false,
