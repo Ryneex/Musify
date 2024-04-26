@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import TopProgressbar from '@/components/TopProgressbar'
 import { cookies } from 'next/headers'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,13 @@ export default async function RootLayout({
     const theme = cookies().get('theme')
     return (
         <html lang="en" className={theme?.value || 'dark'}>
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-S2CP8XQH93"></Script>
+            <Script id='googleAnalytics' dangerouslySetInnerHTML={{__html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S2CP8XQH93');
+            `}}></Script>
             <body className={`${inter.className} bg-slate-50 dark:bg-zinc-950 dark:text-white`}>
                 <TopProgressbar />
                 {children}
