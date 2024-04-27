@@ -7,7 +7,7 @@ import AuthProvider from '@/components/AuthProvider/AuthProvider'
 export default async function layout({ children }: { children: ReactNode }) {
     return (
         <AuthProvider>
-            <div className="grid h-screen grid-cols-[45px_1fr] grid-rows-[50px_1fr_65px] sm:grid-rows-[60px_1fr_65px] lg:grid-cols-[250px_1fr]">
+            <div className="grid h-full grid-cols-[45px_1fr] grid-rows-[50px_1fr_65px] supports-[h:100dvh]:h-[100dvh] sm:grid-rows-[60px_1fr_65px] lg:grid-cols-[250px_1fr]">
                 <Sidebar />
                 <TopNavigation />
                 {children}
