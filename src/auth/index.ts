@@ -34,7 +34,11 @@ class Auth {
         try {
             await this.dbconnect()
             const session = await this.SessionModel.create({ user: userId, expiresAt: Date.now() + expiresIn })
-            cookies().set(this.session_cookie_name, session._id, { httpOnly: true })
+            cookies().set(this.session_cookie_name, session._id, {
+                httpOnly: true,
+                expires: Date.now() + expiresIn,
+                secure: process.env.NODE_ENV === 'production',
+            })
             return { success: 'Session created successfully', data: session }
         } catch (error) {
             return { error: "Couldn't create Session" }
