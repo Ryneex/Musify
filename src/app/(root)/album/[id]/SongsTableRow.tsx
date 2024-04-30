@@ -3,7 +3,7 @@
 import playerStore from '@/store/player.store'
 import Song from '@/types/song.types'
 import { Duration } from 'luxon'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { IoIosPause } from 'react-icons/io'
 import { IoPlayOutline } from 'react-icons/io5'
 import { useSnapshot } from 'valtio'

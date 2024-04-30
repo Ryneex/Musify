@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import downloadSongs from '../helpers/downloadSongs'
 import Song from '@/types/song.types'
