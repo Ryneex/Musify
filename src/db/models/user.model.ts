@@ -29,6 +29,7 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        isAdmin: Boolean,
         favourites: {
             type: Array,
             default: [],
