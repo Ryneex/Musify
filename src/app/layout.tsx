@@ -33,7 +33,7 @@ export default async function RootLayout({
             `,
                 }}
             ></Script>
-            <body className={`${inter.className} h-full bg-slate-50 dark:bg-zinc-950 dark:text-white`}>
+            <body className={`${inter.className} h-full dark:bg-zinc-950 dark:text-white`}>
                 <TopProgressbar />
                 {children}
             </body>
