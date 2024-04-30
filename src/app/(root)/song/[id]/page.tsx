@@ -1,6 +1,5 @@
 import getSongsById from '@/actions/data/getSongsById'
 import Song from '@/types/song.types'
-import React from 'react'
 import PlayButton from './PlayButton'
 
 export default async function page({ params }: any) {
