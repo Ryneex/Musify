@@ -1,30 +1,19 @@
-import { Model, isValidObjectId } from 'mongoose'
+import { isValidObjectId } from 'mongoose'
 import { cookies } from 'next/headers'
 import { validate } from 'uuid'
-import getSessionModel from './session.model'
+import Session from './session.model'
 
-interface ISessionModel {
-    _id: string
-    user: string
-    expiresAt: Date
-}
 
 interface IAuthConstructor {
-    UserModel: Model<any>
     dbconnect: () => Promise<any>
     session_cookie_name?: string
-    session_collection_name?: string
 }
 
 class Auth {
-    private UserModel: Model<any>
-    private SessionModel: Model<ISessionModel>
     private dbconnect: () => Promise<void>
     private session_cookie_name: string
 
     constructor(options: IAuthConstructor) {
-        this.UserModel = options.UserModel
-        this.SessionModel = getSessionModel(this.UserModel, options.session_collection_name || 'session')
         this.dbconnect = options.dbconnect
         this.session_cookie_name = options.session_cookie_name || 'session_id'
     }
@@ -33,7 +22,7 @@ class Auth {
         if (!isValidObjectId(userId)) return { error: 'Invalid user ID' }
         try {
             await this.dbconnect()
-            const session = await this.SessionModel.create({ user: userId, expiresAt: Date.now() + expiresIn })
+            const session = await Session.create({ user: userId, expiresAt: Date.now() + expiresIn })
             cookies().set(this.session_cookie_name, session._id, {
                 httpOnly: true,
                 expires: Date.now() + expiresIn,
@@ -54,7 +43,7 @@ class Auth {
         if (!session_id || !validate(session_id.value)) return { error: 'Invalid Session ID' }
         try {
             await this.dbconnect()
-            const session = await this.SessionModel.findById(session_id.value, { __v: false }).populate('user', {
+            const session = await Session.findById(session_id.value, { __v: false }).populate('user', {
                 __v: false,
             })
             if (!session) return { error: 'Session not found' }
@@ -73,7 +62,7 @@ class Auth {
         if (!session_id || !validate(session_id.value)) return { error: 'Invalid Session ID' }
         try {
             await this.dbconnect()
-            await this.SessionModel.deleteOne({ _id: session_id.value })
+            await Session.deleteOne({ _id: session_id.value })
             return { success: 'Deleted current users session' }
         } catch (error) {
             return { error: "Couldn't delete current users session" }
@@ -84,7 +73,7 @@ class Auth {
         try {
             const res: any = await this.getCurrentUser()
             if (res.error) return { error: res.error }
-            await this.SessionModel.deleteMany({ user: res._id })
+            await Session.deleteMany({ user: res._id })
             return { success: 'Deleted current users all session' }
         } catch (error) {
             return { error: "Couldn't delete current users session" }
@@ -97,7 +86,7 @@ class Auth {
         }
         try {
             await this.dbconnect()
-            const deletedSessions = await this.SessionModel.deleteMany(filter)
+            const deletedSessions = await Session.deleteMany(filter)
             if (!deletedSessions.deletedCount) return { success: 'Session was not found with provied Session/User ID' }
             return { success: filter.user ? 'Deleted sessions by user id' : 'Deleted session by session id' }
         } catch (error) {
@@ -108,7 +97,7 @@ class Auth {
     async deleteExpiredSessions() {
         try {
             await this.dbconnect()
-            await this.SessionModel.deleteMany({ expiresAt: { $lte: new Date() } })
+            await Session.deleteMany({ expiresAt: { $lte: new Date() } })
             return { success: 'Deleted all expired sessions' }
         } catch (error) {
             return { error: "Couldn't delete expired sessions" }
@@ -118,7 +107,7 @@ class Auth {
     async deleteAllSessions() {
         try {
             await this.dbconnect()
-            await this.SessionModel.deleteMany({})
+            await Session.deleteMany({})
             return { success: 'Deleted all sessions' }
         } catch (error) {
             return { error: "Couldn't delete expired sessions" }
