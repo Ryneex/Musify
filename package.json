@@ -11,7 +11,11 @@
         "add": "npx shadcn-ui@latest add"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
         "@hookform/resolvers": "^3.3.4",
+        "@mui/material": "^5.15.16",
+        "@mui/x-charts": "^7.3.2",
         "@radix-ui/react-context-menu": "^2.1.5",
         "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-dropdown-menu": "^2.0.6",
