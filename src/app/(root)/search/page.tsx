@@ -4,17 +4,11 @@ import getSongsbyQuery from '@/actions/data/getSongsbyQuery'
 import AlbumSlider from '@/components/AlbumSlider/AlbumSlider'
 
 export default async function page({ searchParams }: any) {
-    if (!searchParams.query)
-        return <h1 className="flex h-full items-center justify-center font-medium text-red-400">Query is required</h1>
+    if (!searchParams.query) return <h1 className="flex h-full items-center justify-center font-medium text-red-400">Query is required</h1>
     const songsReq = getSongsbyQuery(searchParams.query)
     const albumsReq = getAlbumsbyQuery(searchParams.query)
     const res = await Promise.all([songsReq, albumsReq])
-    if (res[0].error && res[1].error)
-        return (
-            <h1 className="flex h-full items-center justify-center font-medium text-red-400">
-                Something went wrong and no reason was provided
-            </h1>
-        )
+    if (res[0].error && res[1].error) return <h1 className="flex h-full items-center justify-center font-medium text-red-400">Something went wrong and no reason was provided</h1>
 
     return (
         <div className="overflow-hidden pl-3 pt-5 sm:pl-5">

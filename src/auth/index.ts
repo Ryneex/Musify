@@ -3,7 +3,6 @@ import { cookies } from 'next/headers'
 import { validate } from 'uuid'
 import Session from './session.model'
 
-
 interface IAuthConstructor {
     dbconnect: () => Promise<any>
     session_cookie_name?: string

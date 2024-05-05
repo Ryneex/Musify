@@ -1,14 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { IoMusicalNotes } from 'react-icons/io5'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuTrigger,
-} from '@/components/shadcn/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/shadcn/ui/dropdown-menu'
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { ResetIcon } from '@radix-ui/react-icons'
 import { BiEdit } from 'react-icons/bi'
@@ -19,10 +12,7 @@ import playlistStore from '@/store/playlist.store'
 export default function PlaylistCard({ playlist, setEditFormPlaylistId, setIsEditFormOpen, setEditFormName }: any) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     return (
-        <Link
-            href={`/myplaylists/${playlist._id}`}
-            className="relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.08] sm:gap-1 md:p-3"
-        >
+        <Link href={`/myplaylists/${playlist._id}`} className="relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.08] sm:gap-1 md:p-3">
             <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl">
                 <IoMusicalNotes className="text-6xl text-black/30 dark:text-white/30" />
             </div>

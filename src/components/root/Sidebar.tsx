@@ -25,21 +25,14 @@ export default function Sidebar() {
             </div>
             <div className=" mt-5 flex flex-col gap-1 font-medium text-black/70 dark:font-normal dark:text-white/70">
                 {links.map((link, i) => (
-                    <Link
-                        key={i}
-                        href={link.href}
-                        className={`flex h-8 items-center justify-center gap-2 rounded-md text-sm hover:bg-black/5 dark:hover:bg-white/5 lg:justify-start lg:px-2 ${pathname === link.href && 'bg-slate-200 hover:bg-slate-200 dark:bg-white/15 dark:hover:bg-white/15'}`}
-                    >
+                    <Link key={i} href={link.href} className={`flex h-8 items-center justify-center gap-2 rounded-md text-sm hover:bg-black/5 dark:hover:bg-white/5 lg:justify-start lg:px-2 ${pathname === link.href && 'bg-slate-200 hover:bg-slate-200 dark:bg-white/15 dark:hover:bg-white/15'}`}>
                         <div className="text-xl">{link.icon}</div>
                         <span className="hidden lg:block">{link.name}</span>
                     </Link>
                 ))}
             </div>
             <div className="mt-auto flex flex-col items-center gap-2 px-0.5 sm:hidden">
-                <div
-                    onClick={() => userStore.toggleTheme()}
-                    className="flex aspect-square w-full cursor-pointer select-none items-center justify-center rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30"
-                >
+                <div onClick={() => userStore.toggleTheme()} className="flex aspect-square w-full cursor-pointer select-none items-center justify-center rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30">
                     <MdNightsStay className="hidden dark:block" />
                     <MdOutlineLightMode className="block dark:hidden" />
                 </div>

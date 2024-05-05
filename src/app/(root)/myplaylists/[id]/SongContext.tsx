@@ -1,16 +1,6 @@
 'use client'
 
-import {
-    ContextMenu,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuSeparator,
-    ContextMenuShortcut,
-    ContextMenuSub,
-    ContextMenuSubContent,
-    ContextMenuSubTrigger,
-    ContextMenuTrigger,
-} from '@/components/shadcn/ui/context-menu'
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger } from '@/components/shadcn/ui/context-menu'
 import downloadSong from '@/helpers/downloadSong'
 import playlistStore from '@/store/playlist.store'
 import Song from '@/types/song.types'
@@ -21,17 +11,7 @@ import { LuTrash } from 'react-icons/lu'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import { useSnapshot } from 'valtio'
 
-export default function SongContext({
-    children,
-    song,
-    playlistId,
-    setSongs,
-}: {
-    children: ReactNode
-    song: Song
-    playlistId: string
-    setSongs: any
-}) {
+export default function SongContext({ children, song, playlistId, setSongs }: { children: ReactNode; song: Song; playlistId: string; setSongs: any }) {
     const { playlists } = useSnapshot(playlistStore)
     return (
         <ContextMenu>

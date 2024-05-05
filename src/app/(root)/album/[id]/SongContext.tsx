@@ -1,16 +1,6 @@
 'use client'
 
-import {
-    ContextMenu,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuSeparator,
-    ContextMenuShortcut,
-    ContextMenuSub,
-    ContextMenuSubContent,
-    ContextMenuSubTrigger,
-    ContextMenuTrigger,
-} from '@/components/shadcn/ui/context-menu'
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger } from '@/components/shadcn/ui/context-menu'
 import downloadSong from '@/helpers/downloadSong'
 import playlistStore from '@/store/playlist.store'
 import userStore from '@/store/user.store'
@@ -28,10 +18,7 @@ export default function SongContext({ children, song }: { children: ReactNode; s
         <ContextMenu>
             <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
             <ContextMenuContent className="dark:bg-zinc-900">
-                <ContextMenuItem
-                    onClick={() => userStore.addFavouriteSong(song)}
-                    className="justify-between gap-4 text-red-500 hover:!text-red-500 dark:text-red-400 dark:hover:!text-red-400"
-                >
+                <ContextMenuItem onClick={() => userStore.addFavouriteSong(song)} className="justify-between gap-4 text-red-500 hover:!text-red-500 dark:text-red-400 dark:hover:!text-red-400">
                     Add to Favourites
                     <ContextMenuShortcut>
                         <BiHeart className="text-base text-red-500 dark:text-red-400" />

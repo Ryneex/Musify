@@ -41,10 +41,7 @@ export default function Page() {
 
     return (
         <div className="flex h-screen w-full items-center justify-center dark:bg-black">
-            <div
-                onClick={() => userStore.toggleTheme()}
-                className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30"
-            >
+            <div onClick={() => userStore.toggleTheme()} className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30">
                 <div className="flex h-full w-full items-center justify-center">
                     <MdNightsStay className="hidden dark:block" />
                     <MdOutlineLightMode className="block dark:hidden" />
@@ -64,12 +61,7 @@ export default function Page() {
                                         <FormMessage className="grow dark:text-red-400" />
                                     </div>
                                     <FormControl>
-                                        <Input
-                                            className="dark:text-slate-200"
-                                            autoComplete="email"
-                                            placeholder="mail@example.com"
-                                            {...field}
-                                        />
+                                        <Input className="dark:text-slate-200" autoComplete="email" placeholder="mail@example.com" {...field} />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -84,18 +76,9 @@ export default function Page() {
                                         <FormMessage className="grow dark:text-red-400" />
                                     </div>
                                     <FormControl>
-                                        <Input
-                                            className="dark:text-slate-200"
-                                            type="password"
-                                            autoComplete="current-password"
-                                            placeholder="Password"
-                                            {...field}
-                                        />
+                                        <Input className="dark:text-slate-200" type="password" autoComplete="current-password" placeholder="Password" {...field} />
                                     </FormControl>
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-xs text-blue-500 hover:underline dark:text-blue-400"
-                                    >
+                                    <Link href="/forgot-password" className="text-xs text-blue-500 hover:underline dark:text-blue-400">
                                         Forgot Password?
                                     </Link>
                                 </FormItem>
@@ -111,10 +94,7 @@ export default function Page() {
                         </Button>
                     </form>
                 </Form>
-                <Link
-                    href="/signup"
-                    className="mx-auto block w-fit text-sm font-medium text-blue-500 hover:underline dark:text-blue-400"
-                >
+                <Link href="/signup" className="mx-auto block w-fit text-sm font-medium text-blue-500 hover:underline dark:text-blue-400">
                     Don&apos;t have an account?
                 </Link>
             </div>

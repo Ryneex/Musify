@@ -35,27 +35,19 @@ export default function SongsSlider({ songs = [], name, lockExpanded }: Props) {
             <div className="mb-2 flex items-center gap-1 sm:mb-4 sm:gap-3">
                 <h2 className="text-lg font-bold text-black/80 dark:text-white/85 md:text-xl">{name}</h2>
                 {!lockExpanded && (
-                    <div
-                        onClick={() => setExpanded(!expanded)}
-                        className="mr-auto cursor-pointer select-none rounded-md p-1 text-xl text-black/60 hover:bg-black/10 dark:text-white/60"
-                    >
+                    <div onClick={() => setExpanded(!expanded)} className="mr-auto cursor-pointer select-none rounded-md p-1 text-xl text-black/60 hover:bg-black/10 dark:text-white/60">
                         {expanded ? <RiExpandUpDownFill /> : <RiExpandLeftRightFill />}
                     </div>
                 )}
                 {!expanded && (
                     <div className="flex select-none gap-0 text-2xl text-black/60 dark:text-white/60 sm:gap-2">
                         <MdOutlineKeyboardArrowLeft className="cursor-pointer" onClick={() => emblaApi?.scrollPrev()} />
-                        <MdOutlineKeyboardArrowRight
-                            className="cursor-pointer"
-                            onClick={() => emblaApi?.scrollNext()}
-                        />
+                        <MdOutlineKeyboardArrowRight className="cursor-pointer" onClick={() => emblaApi?.scrollNext()} />
                     </div>
                 )}
             </div>
             <div className="overflow-hidden" ref={emblaRef}>
-                <div
-                    className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-2 overflow-auto xs:grid-cols-3 sm:!gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-9' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}
-                >
+                <div className={`mb-7 ${expanded ? 'grid grid-cols-2 !gap-2 overflow-auto xs:grid-cols-3 sm:!gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-9' : 'flex'} gap-2 sm:mb-10 sm:gap-3 md:gap-4`}>
                     {songs.map((e) => (
                         <Song key={e.id} expanded={expanded} songs={songs} song={e} />
                     ))}

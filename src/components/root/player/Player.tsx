@@ -74,11 +74,7 @@ export default function Player() {
             <audio
                 onTimeUpdate={updateSliderValue}
                 ref={audioRef}
-                src={
-                    Array.isArray(currentSong.downloadUrl)
-                        ? currentSong.downloadUrl[currentSong.downloadUrl.length - 1].url
-                        : ''
-                }
+                src={Array.isArray(currentSong.downloadUrl) ? currentSong.downloadUrl[currentSong.downloadUrl.length - 1].url : ''}
                 onEnded={() => {
                     playerStore.addToPlayedSong(currentSong.id)
                     playerStore.songEnded()
@@ -93,20 +89,11 @@ export default function Player() {
             {/* Information About Current Song */}
             <div className="hidden basis-1/6 items-center gap-2 overflow-hidden lg:flex">
                 <div className="aspect-square h-9 shrink-0 overflow-hidden rounded-md bg-gray-400">
-                    <img
-                        src={
-                            Array.isArray(currentSong.image) ? currentSong.image[currentSong.image.length - 1].url : ''
-                        }
-                        alt=""
-                    />
+                    <img src={Array.isArray(currentSong.image) ? currentSong.image[currentSong.image.length - 1].url : ''} alt="" />
                 </div>
                 <div className="flex flex-col overflow-hidden">
-                    <span className="truncate text-sm font-medium text-black/90 dark:font-normal dark:text-white/90">
-                        {currentSong.name || 'No Name'}
-                    </span>
-                    <span className="truncate text-xs text-black/80 dark:text-white/60">
-                        {Array.isArray(currentSong?.artists?.primary) ? currentSong?.artists?.all[0]?.name : 'unknown'}
-                    </span>
+                    <span className="truncate text-sm font-medium text-black/90 dark:font-normal dark:text-white/90">{currentSong.name || 'No Name'}</span>
+                    <span className="truncate text-xs text-black/80 dark:text-white/60">{Array.isArray(currentSong?.artists?.primary) ? currentSong?.artists?.all[0]?.name : 'unknown'}</span>
                 </div>
             </div>
             {/* Main audio Player with controls */}
@@ -116,19 +103,13 @@ export default function Player() {
                     {/* Playback controls */}
                     <div className="flex items-center gap-2 text-2xl text-black/90 dark:text-white/90 md:gap-3">
                         <MdSkipPrevious onClick={() => playerStore.playPrevSong()} className="cursor-pointer" />
-                        <div
-                            className="flex aspect-square w-6 cursor-pointer items-center justify-center  overflow-hidden rounded-full text-[20px]"
-                            onClick={() => currentSong.downloadUrl && playerStore.togglePlay()}
-                        >
+                        <div className="flex aspect-square w-6 cursor-pointer items-center justify-center  overflow-hidden rounded-full text-[20px]" onClick={() => currentSong.downloadUrl && playerStore.togglePlay()}>
                             {isAudioPlaying ? <IoIosPause /> : <IoPlayOutline className="ml-1" />}
                         </div>
                         <MdSkipNext onClick={() => playerStore.playNextSong()} className="cursor-pointer" />
                         <Tooltip delayDuration={100}>
                             <TooltipTrigger onClick={(e) => e.preventDefault()}>
-                                <IoShuffle
-                                    onClick={() => playerStore.toggleShuffle()}
-                                    className={`cursor-pointer text-2xl ${shuffle && 'text-blue-600 dark:text-blue-400'}`}
-                                />
+                                <IoShuffle onClick={() => playerStore.toggleShuffle()} className={`cursor-pointer text-2xl ${shuffle && 'text-blue-600 dark:text-blue-400'}`} />
                             </TooltipTrigger>
                             <TooltipContent onPointerDownOutside={(e) => e.preventDefault()} side="top">
                                 Shuffle

@@ -7,17 +7,7 @@ import { useMemo } from 'react'
 import { BiHeart } from 'react-icons/bi'
 import { FaHeart, FaRegCirclePlay } from 'react-icons/fa6'
 import { useSnapshot } from 'valtio'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from '@/components/shadcn/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/shadcn/ui/dropdown-menu'
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { MdOutlineFileDownload } from 'react-icons/md'
 import Link from 'next/link'
@@ -41,11 +31,7 @@ export default function PlayButton({ song }: { song: Song }) {
                 }}
                 className="flex aspect-square w-8 cursor-pointer items-center justify-center overflow-hidden text-blue-400"
             >
-                {currentSong.id === song.id && isAudioPlaying ? (
-                    <LuPauseCircle className="size-8" />
-                ) : (
-                    <FaRegCirclePlay className="size-[30px]" />
-                )}
+                {currentSong.id === song.id && isAudioPlaying ? <LuPauseCircle className="size-8" /> : <FaRegCirclePlay className="size-[30px]" />}
             </div>
             <div
                 className="cursor-pointer text-3xl text-pink-400"
@@ -57,11 +43,7 @@ export default function PlayButton({ song }: { song: Song }) {
                     }
                 }}
             >
-                {isFavourite ? (
-                    <FaHeart className="fill-red-400" />
-                ) : (
-                    <BiHeart className="fill-black/70 dark:fill-white" />
-                )}
+                {isFavourite ? <FaHeart className="fill-red-400" /> : <BiHeart className="fill-black/70 dark:fill-white" />}
             </div>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild className="text-xl text-black/60 dark:text-white">

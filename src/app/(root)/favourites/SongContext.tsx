@@ -1,16 +1,6 @@
 'use client'
 
-import {
-    ContextMenu,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuSeparator,
-    ContextMenuShortcut,
-    ContextMenuSub,
-    ContextMenuSubContent,
-    ContextMenuSubTrigger,
-    ContextMenuTrigger,
-} from '@/components/shadcn/ui/context-menu'
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger } from '@/components/shadcn/ui/context-menu'
 import downloadSong from '@/helpers/downloadSong'
 import playlistStore from '@/store/playlist.store'
 import userStore from '@/store/user.store'
@@ -64,10 +54,7 @@ export default function SongContext({ children, song }: { children: ReactNode; s
                     </ContextMenuShortcut>
                 </ContextMenuItem>
                 <ContextMenuSeparator />
-                <ContextMenuItem
-                    onClick={() => userStore.removeFavouriteSong(song.id)}
-                    className="justify-between text-red-500 hover:!text-red-500 dark:text-red-400 dark:hover:!text-red-400"
-                >
+                <ContextMenuItem onClick={() => userStore.removeFavouriteSong(song.id)} className="justify-between text-red-500 hover:!text-red-500 dark:text-red-400 dark:hover:!text-red-400">
                     Remove
                     <ContextMenuShortcut>
                         <LuTrash className="text-red-500 dark:text-red-400" />

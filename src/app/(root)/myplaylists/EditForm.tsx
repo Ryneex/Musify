@@ -4,13 +4,7 @@ import { Input } from '@/components/shadcn/ui/input'
 import playlistStore from '@/store/playlist.store'
 import { FormEvent, useState } from 'react'
 
-export default function EditForm({
-    editFormPlaylistId,
-    editFormName,
-    setEditFormName,
-    isEditFormOpen,
-    setIsEditFormOpen,
-}: any) {
+export default function EditForm({ editFormPlaylistId, editFormName, setEditFormName, isEditFormOpen, setIsEditFormOpen }: any) {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -41,11 +35,7 @@ export default function EditForm({
                 <DialogTitle className="dark:text-white/90">Rename this Playlist</DialogTitle>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <div>
-                        <Input
-                            className="dark:text-white"
-                            value={editFormName}
-                            onChange={(e) => setEditFormName(e.target.value)}
-                        />
+                        <Input className="dark:text-white" value={editFormName} onChange={(e) => setEditFormName(e.target.value)} />
                         {error && <span className="text-sm text-red-400">{error}</span>}
                     </div>
                     <Button disabled={loading} loading={loading}>

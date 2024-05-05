@@ -6,17 +6,7 @@ import { BiHeart } from 'react-icons/bi'
 import { FaHeart, FaRegCirclePlay } from 'react-icons/fa6'
 import { MdOutlineFileDownload, MdOutlinePauseCircle } from 'react-icons/md'
 import { useSnapshot } from 'valtio'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from '@/components/shadcn/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/shadcn/ui/dropdown-menu'
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import { ResetIcon } from '@radix-ui/react-icons'
 import playlistStore from '@/store/playlist.store'
@@ -36,19 +26,10 @@ function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; ex
     }, [])
 
     return (
-        <div
-            key={song.id}
-            className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}
-        >
+        <div key={song.id} className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}>
             <div className="relative w-full select-none overflow-hidden rounded-xl">
-                <img
-                    className="aspect-square w-full object-cover"
-                    src={song.image[song.image.length - 1].url || ''}
-                    alt={song?.name}
-                />
-                <div
-                    className={`absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition duration-300 group-hover:opacity-100 ${currentSong.id === song.id && 'opacity-100'}`}
-                >
+                <img className="aspect-square w-full object-cover" src={song.image[song.image.length - 1].url || ''} alt={song?.name} />
+                <div className={`absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition duration-300 group-hover:opacity-100 ${currentSong.id === song.id && 'opacity-100'}`}>
                     <div
                         onClick={() => {
                             playerStore.changeCurrentSong(song)
@@ -74,15 +55,10 @@ function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; ex
                     {isFavourite ? <FaHeart className="fill-pink-400" /> : <BiHeart className="fill-white" />}
                 </div>
             </div>
-            <Link
-                href={`song/${song.id}`}
-                className="truncate px-1 pt-1 text-sm text-black/90 dark:text-white/90 sm:pt-3"
-            >
+            <Link href={`song/${song.id}`} className="truncate px-1 pt-1 text-sm text-black/90 dark:text-white/90 sm:pt-3">
                 {song.name}
             </Link>
-            <span className="truncate pl-1 text-xs text-black/70 dark:text-white/70">
-                By {song.artists.primary[0]?.name || song.artists.all[0]?.name}
-            </span>
+            <span className="truncate pl-1 text-xs text-black/70 dark:text-white/70">By {song.artists.primary[0]?.name || song.artists.all[0]?.name}</span>
             <DropdownMenu>
                 <DropdownMenuTrigger className="absolute bottom-3 right-2 text-black/60 dark:text-white">
                     <PiDotsThreeOutlineVerticalFill />

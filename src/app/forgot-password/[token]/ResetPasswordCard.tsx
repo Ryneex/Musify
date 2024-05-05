@@ -37,10 +37,7 @@ export default function ResetPasswordCard({ token }: { token: string }) {
 
     return (
         <div className="flex h-screen w-full items-center justify-center">
-            <div
-                onClick={() => userStore.toggleTheme()}
-                className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30"
-            >
+            <div onClick={() => userStore.toggleTheme()} className="fixed right-2 top-2 aspect-square h-full max-h-9 cursor-pointer select-none rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30">
                 <div className="flex h-full w-full items-center justify-center">
                     <MdNightsStay className="hidden dark:block" />
                     <MdOutlineLightMode className="block dark:hidden" />
@@ -49,12 +46,7 @@ export default function ResetPasswordCard({ token }: { token: string }) {
             <div className="flex w-full max-w-xs flex-col gap-3">
                 <span className="text-sm">Enter your new password</span>
                 <div>
-                    <Input
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        type="password"
-                        placeholder="*******"
-                    />
+                    <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*******" />
                     <span className="text-xs font-medium text-red-500 dark:text-red-300">{error}</span>
                 </div>
                 <Button onClick={handleSubmit} loading={loading}>
