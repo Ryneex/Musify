@@ -126,7 +126,7 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
                     <span>User Registered</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="size-3 bg-[rgb(114,204,255)]"></div>
+                    <div className="size-3 bg-indigo-500"></div>
                     <span>Playlist Created</span>
                 </div>
             </div>
@@ -148,6 +148,7 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
                             },
                             {
                                 data: chartData.playlist,
+                                color: "rgb(99 102 241)"
                             },
                         ]}
                     />
