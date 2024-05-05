@@ -25,8 +25,8 @@ export default function SongsTableRow({ song, i, playlistId, setSongs, songList 
     }, [song])
     return (
         <SongContext setSongs={setSongs} playlistId={playlistId} song={song}>
-            <div
-                className="flex h-14 shrink-0 cursor-pointer select-none items-center border-b text-sm hover:bg-gray-700/5 dark:border-white/10 dark:hover:bg-white/5 sm:gap-2"
+            <tr
+                className="h-14 cursor-pointer select-none border-b text-sm hover:bg-gray-700/5 dark:border-white/10 dark:hover:bg-white/5 sm:gap-2"
                 key={song.id}
                 onPointerEnter={() => setIsMouseOver(true)}
                 onPointerLeave={() => setIsMouseOver(false)}
@@ -36,7 +36,7 @@ export default function SongsTableRow({ song, i, playlistId, setSongs, songList 
                     playerStore.SongList = songList
                 }}
             >
-                <div className="flex w-9 shrink-0 items-center justify-center text-black/70 dark:text-white/60 sm:w-12">
+                <td className="text-center text-black/70 dark:text-white/60">
                     {currentSong.id === song.id || isMouseOver ? (
                         <div
                             className={`flex cursor-pointer select-none items-center justify-center ${currentSong.id === song.id && '!text-blue-600 dark:!text-blue-400'}`}
@@ -44,46 +44,31 @@ export default function SongsTableRow({ song, i, playlistId, setSongs, songList 
                                 playerStore.togglePlay()
                             }}
                         >
-                            {isAudioPlaying && currentSong.id === song.id ? (
-                                <IoIosPause className="text-[20px]" />
-                            ) : (
-                                <IoPlayOutline className="text-[20px]" />
-                            )}
+                            {isAudioPlaying && currentSong.id === song.id ? <IoIosPause className="text-[20px]" /> : <IoPlayOutline className="text-[20px]" />}
                         </div>
                     ) : (
                         <span className="text-xs sm:text-sm">{i}</span>
                     )}
-                </div>
-                <div className="flex h-full basis-full items-center gap-2 overflow-hidden leading-[15px] sm:basis-1/2">
-                    <div className="aspect-square h-9 shrink-0 overflow-hidden rounded-md">
-                        <img
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                            src={song.image[song.image.length - 1].url}
-                            alt={song.name}
-                        />
+                </td>
+                <td>
+                    <div className="flex h-full items-center gap-2 leading-[15px]">
+                        <div className="aspect-square h-9 shrink-0 overflow-hidden rounded-md">
+                            <img className="h-full w-full object-cover" loading="lazy" src={song.image[song.image.length - 1].url} alt={song.name} />
+                        </div>
+                        <div className="flex flex-col gap-[2px] overflow-hidden">
+                            <span className={`truncate font-medium text-black/80 dark:font-normal dark:text-white/90 ${currentSong.id === song.id && '!text-blue-600 dark:!text-blue-400'}`}>{song.name}</span>
+                            <span className="truncate text-xs opacity-90 dark:font-light">{song.artists.primary[0]?.name || song.artists.all[0]?.name}</span>
+                        </div>
                     </div>
-                    <div className="flex flex-col gap-[2px] overflow-hidden">
-                        <span
-                            className={`truncate font-medium text-black/80 dark:font-normal dark:text-white/90 ${currentSong.id === song.id && '!text-blue-600 dark:!text-blue-400'}`}
-                        >
-                            {song.name}
-                        </span>
-                        <span className="truncate text-xs opacity-90 dark:font-light">
-                            {song.artists.primary[0]?.name || song.artists.all[0]?.name}
-                        </span>
-                    </div>
-                </div>
-                <div className="hidden basis-1/3 overflow-hidden sm:flex">
-                    <Link href={`/album/${song.album.id}`} className="truncate text-xs hover:underline">
+                </td>
+                <td className="hidden overflow-hidden sm:table-cell">
+                    <Link href={`/album/${song.album.id}`} className="block w-fit truncate text-xs hover:underline">
                         {song.album.name}
                     </Link>
-                </div>
-                <div className="hidden basis-1/4 text-xs md:block">{song.releaseDate}</div>
-                <div className="w-16 shrink-0 pr-2 text-end text-xs text-black/80 dark:text-white/60 sm:w-24 sm:pr-5 sm:text-sm">
-                    {duration}
-                </div>
-            </div>
+                </td>
+                <td className="hidden text-xs md:table-cell">{song.releaseDate}</td>
+                <td className="pr-2 text-end text-xs sm:pr-5 sm:text-sm">{duration}</td>
+            </tr>
         </SongContext>
     )
 }
