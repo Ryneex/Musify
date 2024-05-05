@@ -11,6 +11,7 @@ import callServerActionWithToast from '@/helpers/callServerActionWithToast'
 const userStore = proxy({
     user: { name: null as null | string, email: null as null | string, favourites: [] as string[] },
     favourites: null as null | Song[],
+    theme: null as null | 'light' | 'dark',
 
     async setUser() {
         const { user } = await getUserInfo()
@@ -38,9 +39,11 @@ const userStore = proxy({
     toggleTheme() {
         if (Cookie.get('theme') === 'light') {
             Cookie.set('theme', 'dark')
+            this.theme = 'dark'
             document.querySelector('html')!.className = 'dark'
         } else {
             Cookie.set('theme', 'light')
+            this.theme = 'light'
             document.querySelector('html')!.className = 'light'
         }
     },
