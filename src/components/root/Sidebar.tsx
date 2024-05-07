@@ -7,6 +7,7 @@ import { BiAlbum, BiHeart } from 'react-icons/bi'
 import { GoHome } from 'react-icons/go'
 import { MdNightsStay, MdOutlineLightMode } from 'react-icons/md'
 import ProfileButton from './ProfileButton'
+import { FaGithub } from 'react-icons/fa6'
 
 export default function Sidebar() {
     const pathname = usePathname()
@@ -32,11 +33,14 @@ export default function Sidebar() {
                 ))}
             </div>
             <div className="mt-auto flex flex-col items-center gap-2 px-0.5 sm:hidden">
+                <Link href="https://github.com/Ryneex/Musify" target="_blank">
+                    <FaGithub className="text-3xl" />
+                </Link>
                 <div onClick={() => userStore.toggleTheme()} className="flex aspect-square w-full cursor-pointer select-none items-center justify-center rounded-full bg-black/5 text-2xl hover:bg-black/10 dark:bg-white/20 dark:hover:bg-white/30">
                     <MdNightsStay className="hidden dark:block" />
                     <MdOutlineLightMode className="block dark:hidden" />
                 </div>
-                <div className="aspect-square w-full shrink-0 sm:hidden">
+                <div className="aspect-square w-full shrink-0">
                     <ProfileButton />
                 </div>
             </div>
