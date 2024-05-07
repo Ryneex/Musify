@@ -13,7 +13,7 @@ export default function SongsTable({ playlist }: Props) {
             {!songs.length ? (
                 <div className="flex h-full w-full items-center justify-center text-slate-500 dark:text-slate-300">You don&apos;t have any songs in this playlist</div>
             ) : (
-                <table className="h-full w-full table-fixed">
+                <table className="w-full table-fixed">
                     <thead className="sticky top-0 z-10 h-12 bg-zinc-950 text-sm after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-white/[0.1]">
                         <tr className="font-medium dark:text-white/80">
                             <td className="w-9 text-center sm:w-12">#</td>
