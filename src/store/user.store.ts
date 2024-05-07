@@ -40,11 +40,11 @@ const userStore = proxy({
         if (Cookie.get('theme') === 'light') {
             Cookie.set('theme', 'dark')
             this.theme = 'dark'
-            document.querySelector('html')!.className = 'dark'
+            document.querySelector('html')!.className = 'dark h-full'
         } else {
             Cookie.set('theme', 'light')
             this.theme = 'light'
-            document.querySelector('html')!.className = 'light'
+            document.querySelector('html')!.className = 'light h-full'
         }
     },
 })
