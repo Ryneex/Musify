@@ -47,10 +47,6 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
     const { theme } = useSnapshot(userStore)
 
     useEffect(() => {
-        console.log(month)
-    }, [month])
-
-    useEffect(() => {
         setChartData(() => {
             if (!chartZoomedIn) {
                 const [a, b] = [user, playlist].map((data) => {
@@ -73,7 +69,7 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
                     if (date.getMonth() === month && date.getFullYear() === year) return true
                 })
                 const returnData = new Array(new Date(year, month + 1, 0).getDate()).fill(0).map((_, i) => {
-                    const data = filteredMonth?.dates.find((e) => new Date(e.date).getDay() === ++i)
+                    const data = filteredMonth?.dates.find((e) => new Date(e.date).getDate() === i + 1)
                     if (data) return data.count
                     return 0
                 })
@@ -136,7 +132,6 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
                         onAxisClick={(_, e) => {
                             if (chartZoomedIn) return
                             setChartZoomedIn(true)
-                            console.log(e?.dataIndex)
                             e?.dataIndex && setMonth(e?.dataIndex)
                         }}
                         title="Year"
@@ -148,7 +143,7 @@ export default function Chart({ user, playlist, themeMode }: IProp) {
                             },
                             {
                                 data: chartData.playlist,
-                                color: "rgb(99 102 241)"
+                                color: 'rgb(99 102 241)',
                             },
                         ]}
                     />
