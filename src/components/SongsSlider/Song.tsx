@@ -29,17 +29,15 @@ function Song({ song, songs, expanded }: { song: SongType; songs: SongType[]; ex
         <div key={song.id} className={`group relative flex w-28 ${expanded && '!w-full'} shrink-0 flex-col overflow-hidden rounded-2xl border border-black/10 p-2 backdrop-blur-lg transition duration-300 hover:bg-black/[0.08] dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.08] sm:w-32 sm:gap-1 md:w-36 md:p-3 lg:w-40 xl:w-44`}>
             <div className="relative w-full select-none overflow-hidden rounded-xl">
                 <img className="aspect-square w-full object-cover" src={song.image[song.image.length - 1].url || ''} alt={song?.name} />
-                <div className={`absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/70 opacity-0 transition duration-300 group-hover:opacity-100 ${currentSong.id === song.id && 'opacity-100'}`}>
-                    <div
-                        onClick={() => {
-                            playerStore.changeCurrentSong(song)
-                            playerStore.SongList = songs
-                            playerStore.togglePlay()
-                        }}
-                        className="cursor-pointer text-3xl text-blue-400 transition duration-300 hover:scale-110 md:text-4xl"
-                    >
-                        {currentSong.id === song.id && isAudioPlaying ? <MdOutlinePauseCircle /> : <FaRegCirclePlay />}
-                    </div>
+                <div
+                    className={`absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center bg-black/70 opacity-0 transition duration-300 group-hover:opacity-100 ${currentSong.id === song.id && 'opacity-100'}`}
+                    onClick={() => {
+                        playerStore.changeCurrentSong(song)
+                        playerStore.SongList = songs
+                        playerStore.togglePlay()
+                    }}
+                >
+                    <div className="text-3xl text-blue-400 transition duration-300 hover:scale-110 md:text-4xl">{currentSong.id === song.id && isAudioPlaying ? <MdOutlinePauseCircle /> : <FaRegCirclePlay />}</div>
                 </div>
                 <div className="absolute bottom-0 left-0 size-10 rounded-full bg-black blur-xl"></div>
                 <div
