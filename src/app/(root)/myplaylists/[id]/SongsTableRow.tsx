@@ -44,7 +44,17 @@ export default function SongsTableRow({ song, i, playlistId, setSongs, songList 
                                 playerStore.togglePlay()
                             }}
                         >
-                            {isAudioPlaying && currentSong.id === song.id ? <IoIosPause className="text-[20px]" /> : <IoPlayOutline className="text-[20px]" />}
+                            {isAudioPlaying && currentSong.id === song.id ? (
+                                isMouseOver ? (
+                                    <IoIosPause className="text-[20px]" />
+                                ) : (
+                                    <div className="p-[15px]">
+                                        <img className="h-full w-full" src="/sound_wave.gif" alt="" />
+                                    </div>
+                                )
+                            ) : (
+                                <IoPlayOutline className="text-[20px]" />
+                            )}
                         </div>
                     ) : (
                         <span className="text-xs sm:text-sm">{i}</span>
