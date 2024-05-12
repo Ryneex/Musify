@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import VerifyCard from './VerifyCard'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function page() {
     const res = await auth.getCurrentUser()

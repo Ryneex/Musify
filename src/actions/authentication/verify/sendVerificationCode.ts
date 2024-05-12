@@ -2,7 +2,7 @@
 
 import User from '@/db/models/user.model'
 import nodemailer from 'nodemailer'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 import { redirect } from 'next/navigation'
 
 export default async function sendVerificationCode() {

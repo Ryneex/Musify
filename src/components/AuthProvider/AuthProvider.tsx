@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 import AuthClientProvider from './AuthClientProvider'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function AuthProvider({ children }: { children: ReactNode }) {
     const res = await auth.getCurrentUser()

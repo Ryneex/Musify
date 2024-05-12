@@ -5,7 +5,7 @@ import dbconnect from '@/db/dbconnect'
 import signupScema from '@/schemas/signup'
 import argon from 'argon2'
 import { z } from 'zod'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function Signup(values: z.infer<typeof signupScema>) {
     const db = await dbconnect()

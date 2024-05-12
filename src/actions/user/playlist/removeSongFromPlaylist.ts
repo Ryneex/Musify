@@ -1,6 +1,6 @@
 'use server'
 
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 import Playlist from '@/db/models/playlist.model'
 import { redirect } from 'next/navigation'
 

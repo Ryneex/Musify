@@ -2,7 +2,7 @@
 
 import dbconnect from '@/db/dbconnect'
 import User from '@/db/models/user.model'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 import { redirect } from 'next/navigation'
 
 export default async function verifyAccount(code: number) {

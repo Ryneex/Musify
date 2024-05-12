@@ -26,6 +26,7 @@
         "@radix-ui/react-slot": "^1.0.2",
         "@radix-ui/react-tooltip": "^1.0.7",
         "argon2": "^0.40.1",
+        "axios": "^1.6.8",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "embla-carousel-react": "^8.0.0",

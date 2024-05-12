@@ -4,7 +4,7 @@ import User from '@/db/models/user.model'
 import dbconnect from '@/db/dbconnect'
 import loginScema from '@/schemas/login'
 import argon from 'argon2'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function Login(values: any) {
     const db = await dbconnect()

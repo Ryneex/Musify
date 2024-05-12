@@ -1,19 +1,18 @@
 'use server'
 
-import request from '@/config/ky.config'
+import { Endpoints } from '@/constants/endpoints'
+import FetchJiosaavn from '@/helpers/FetchJiosaavn'
+import { formatSong } from '@/helpers/format.song'
 
 export default async function getSongsbyQuery(query: string) {
     try {
-        const data: any = await request
-            .get('https://saavn.dev/api/search/songs', {
-                searchParams: {
-                    query,
-                    limit: 1000,
-                },
-            })
-            .json()
-        return { songs: data.data.results }
+        const { data } = await FetchJiosaavn({
+            __call: Endpoints.search.songs,
+            q: query,
+            n: 100,
+        })
+        return { songs: data.results.map((e) => formatSong(e)) }
     } catch (error) {
-        return { error: 'Something went wrong when fetching Trending Data' }
+        return { error: 'Something went wrong when fetching songs' }
     }
 }

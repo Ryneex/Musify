@@ -2,7 +2,7 @@
 
 import User from '@/db/models/user.model'
 import { redirect } from 'next/navigation'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function RemoveFavourites(songId: string) {
     const res = await auth.getCurrentUser()

@@ -1,4 +1,4 @@
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 

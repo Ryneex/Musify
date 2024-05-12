@@ -5,7 +5,7 @@ import verifyPasswordResetToken from './verifyPasswordResetToken'
 import User from '@/db/models/user.model'
 import argon from 'argon2'
 import { z } from 'zod'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function resetPassword({ token, password }: { [key: string]: string }) {
     const db = await dbconnect()

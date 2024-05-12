@@ -2,7 +2,7 @@
 
 import Playlist from '@/db/models/playlist.model'
 import { redirect } from 'next/navigation'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function addSongInPlaylist(playlistId: string, songId: string) {
     const res = await auth.getCurrentUser()

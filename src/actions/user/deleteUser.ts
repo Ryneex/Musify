@@ -6,7 +6,7 @@ import argon from 'argon2'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 
 export default async function DeleteUser(password: string) {
     const res = await auth.getCurrentUser()

@@ -1,6 +1,6 @@
 'use server'
 
-import auth from '@/config/auth'
+import auth from '@/auth/auth'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'

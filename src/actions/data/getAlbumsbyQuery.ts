@@ -1,19 +1,18 @@
 'use server'
 
-import request from '@/config/ky.config'
+import { Endpoints } from '@/constants/endpoints'
+import FetchJiosaavn from '@/helpers/FetchJiosaavn'
+import { formatAlbum } from '@/helpers/format.album'
 
 export default async function getAlbumsbyQuery(query: string) {
     try {
-        const res: any = await request
-            .get('https://saavn.dev/api/search/albums', {
-                searchParams: {
-                    query: query,
-                    limit: 1000,
-                },
-            })
-            .json()
-        return { albums: res.data.results }
+        const { data } = await FetchJiosaavn({
+            __call: Endpoints.search.albums,
+            q: query,
+            limit: 1000,
+        })
+        return { albums: data.results.map((e) => formatAlbum(e)) }
     } catch (error) {
-        return { error: 'Something went wrong when fetching Album Queries' }
+        return { error: 'Something went wrong when fetching Albums' }
     }
 }
