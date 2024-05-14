@@ -11,6 +11,7 @@ export default async function getPlaylistWithSong(playlistId: string) {
 
     try {
         const playlist = await Playlist.findOne({ _id: playlistId, owner_id: res._id })
+        if (!playlist) return { error: "Playlist couldn't be found" }
         const songs = await getSongsById(playlist.songs)
         return { playlist: { ...JSON.parse(JSON.stringify(playlist)), songs: songs.error ? [] : songs.songs } }
     } catch (error) {

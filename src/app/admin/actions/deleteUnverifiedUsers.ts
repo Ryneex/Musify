@@ -9,7 +9,7 @@ export default async function deleteUnverifiedUsers() {
     if (!res.verified || res.error || !res.isAdmin) redirect('/login')
 
     try {
-        const res = await User.deleteMany({ verified: false })
+        await User.deleteMany({ verified: false })
         return { success: 'Successfully Deleted Unverified Users' }
     } catch (error) {
         return { error: 'Something went wrong' }

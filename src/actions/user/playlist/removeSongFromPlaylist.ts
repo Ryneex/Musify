@@ -10,6 +10,7 @@ export default async function removeSongFromPlaylist(playlistId: string, songId:
 
     try {
         const playlist = await Playlist.findOne({ _id: playlistId, owner_id: res._id })
+        if (!playlist) return { error: "Playlist couldn't be found" }
         const songList = playlist.songs.filter((e: any) => e !== songId)
         await Playlist.findOneAndUpdate({ _id: playlistId, owner_id: res._id }, { songs: songList })
         return { success: 'Successfully removed' }
