@@ -1,4 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose, { Model } from 'mongoose'
+import User, { IUser } from './user.model'
+
+export interface IPlaylist {
+    name: string
+    owner_id: string | IUser
+    songs: string[]
+}
 
 const schema = new mongoose.Schema(
     {
@@ -7,7 +14,8 @@ const schema = new mongoose.Schema(
             required: true,
         },
         owner_id: {
-            type: String,
+            type: mongoose.Schema.ObjectId,
+            ref: User,
             required: true,
         },
         songs: {
@@ -18,6 +26,6 @@ const schema = new mongoose.Schema(
     { timestamps: true }
 )
 
-const Playlist = mongoose.models.Playlist || mongoose.model('Playlist', schema)
+const Playlist: Model<IPlaylist> = mongoose.models.Playlist || mongoose.model('Playlist', schema)
 
 export default Playlist
