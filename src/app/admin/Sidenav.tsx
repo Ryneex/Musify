@@ -4,12 +4,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LuHome } from 'react-icons/lu'
 import { MdOutlineSpaceDashboard, MdOutlineAirplaneTicket } from 'react-icons/md'
+import { PiPlaylistBold } from 'react-icons/pi'
 import { TbUsers } from 'react-icons/tb'
 
 export default function Sidenav() {
     const links = [
         { name: 'Home', path: '/admin', icon: LuHome },
         { name: 'Users', path: '/admin/users', icon: TbUsers },
+        { name: 'Playlists', path: '/admin/playlists', icon: PiPlaylistBold },
         { name: 'Sessions', path: '/admin/sessions', icon: MdOutlineAirplaneTicket },
     ]
     const pathname = usePathname()
