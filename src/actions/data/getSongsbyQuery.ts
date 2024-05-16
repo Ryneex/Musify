@@ -3,6 +3,7 @@
 import { Endpoints } from '@/constants/endpoints'
 import FetchJiosaavn from '@/helpers/FetchJiosaavn'
 import { formatSong } from '@/helpers/format.song'
+import takeFirst from 'lodash/take'
 
 export default async function getSongsbyQuery(query: string, limit = 100) {
     try {
@@ -11,7 +12,12 @@ export default async function getSongsbyQuery(query: string, limit = 100) {
             q: query,
             n: limit,
         })
-        return { songs: data.results.map((e) => formatSong(e)) }
+        return {
+            songs: takeFirst(
+                data.results.map((e) => formatSong(e)),
+                limit
+            ),
+        }
     } catch (error) {
         return { error: 'Something went wrong when fetching songs' }
     }
