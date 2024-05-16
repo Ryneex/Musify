@@ -16,7 +16,7 @@ export default async function getSongsbyQuery(query: string, limit = 100) {
             songs: takeFirst(
                 data.results.map((e) => formatSong(e)),
                 limit
-            ),
+            ) as any,
         }
     } catch (error) {
         return { error: 'Something went wrong when fetching songs' }
