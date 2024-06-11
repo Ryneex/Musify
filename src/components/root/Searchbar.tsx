@@ -25,6 +25,7 @@ export default function Searchbar() {
 
     useMemo(() => {
         setInput(searchParams.get('query') || '')
+        setFocus(false)
     }, [searchParams])
 
     function Search(e: FormEvent<HTMLFormElement>) {
@@ -49,16 +50,16 @@ export default function Searchbar() {
     function hideSongsSuggestion(e: MouseEvent) {
         !form.current?.contains(e.target as Node) && setFocus(false)
     }
+    
     useEffect(() => {
         document.addEventListener('click', hideSongsSuggestion)
-
         return () => document.removeEventListener('click', hideSongsSuggestion)
     }, [])
 
     return (
         <form ref={form} onSubmit={Search} className="relative flex w-full gap-2">
             <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-black/60 dark:text-white/60" />
-            <Input onFocus={() => setFocus(true)} className="max-w-sm rounded-lg pl-10 focus-visible:ring-indigo-500 dark:text-slate-200 dark:focus-visible:ring-indigo-500" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search..." />
+            <Input onClick={() => setFocus(true)} className="max-w-sm rounded-lg pl-10 focus-visible:ring-indigo-500 dark:text-slate-200 dark:focus-visible:ring-indigo-500" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search..." />
             <Button className="rounded-md" type="submit">
                 Search
             </Button>
