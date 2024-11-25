@@ -64,7 +64,7 @@ export default function Searchbar() {
                 Search
             </Button>
             {focus && searchedSongs?.length && (
-                <div className="absolute top-[calc(100%+10px)] z-10 flex w-full max-w-4xl flex-col gap-2 rounded-md bg-slate-100 p-2 shadow-md ring-1 ring-indigo-500 dark:bg-zinc-900">
+                <div className="absolute top-[calc(100%+10px)] z-20 flex w-full max-w-4xl flex-col gap-2 rounded-md bg-slate-100 p-2 shadow-md ring-1 ring-indigo-500 dark:bg-zinc-900">
                     {searchedSongs.map((song, i) => (
                         <div
                             key={i}
